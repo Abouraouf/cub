@@ -1,5 +1,5 @@
 NAME = cub3D
-SRC = cub3D.c utils.c 
+SRC = cub3D.c utils.c get_next_line.c get_next_line_utils.c 
 SRC_O = $(SRC:.c=.o)
 
 %.o:%.c cub3D.h get_next_line.h
