@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:40:08 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/17 16:29:33 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/09/17 18:08:10 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // 	int		fd;
 // 	char	**ret;
 // 	int		i;
-	
+
 // 	fd = open(name_of_file, O_RDONLY);
 // 	i = 0;
 
@@ -46,6 +46,5 @@ void	ft_read_all(int fd, t_cub3d *info)
 		free(tmp);
 		tmp = NULL;
 	}
-	printf("%s",info->map_coord);
 }
 
