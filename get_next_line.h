@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:26:08 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/17 16:25:17 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/09/24 12:54:41 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char *s1, char const *s2);
 size_t	ft_strlen(const	char *str);
 char	*ft_strdup(const char *s1);
+
 #endif

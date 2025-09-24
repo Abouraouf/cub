@@ -6,55 +6,11 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/22 17:59:03 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/09/24 12:56:01 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-int	ft_check_duplicates(int	*flags)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < 5)
-	{
-		j = i + 1;
-		while (j < 5)
-		{
-			if (flags[i] == flags[j])
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	find_nswe(char *str)
-{
-	if (!ft_strncmp(str, "NO ", 3))
-		return (1);
-	if (!ft_strncmp(str, "SO ", 3))
-		return (2);
-	if (!ft_strncmp(str, "WE ", 3))
-		return (3);
-	if (!ft_strncmp(str, "EA ", 3))
-		return (4);
-	if (!ft_strncmp(str, "F ", 2))
-		return (5);
-	return (0);
-}
-
-void	skip_spaces(char *str, int *i)
-{
-	if (!str)
-		return ;
-	while (str[*i] && str[*i] == ' ')
-		(*i)++;
-}
 
 // this one checks the first line
 // int	ft_check_first_lines(t_cub3d	*info)
@@ -73,7 +29,17 @@ void	skip_spaces(char *str, int *i)
 
 void	ft_copy_the_first_lines(t_cub3d *info, int i)
 {
-	
+	int	j;
+
+	j = -1;
+	info->map_coord = malloc(i + 1);
+	if (!info->map_coord)
+		return ;// memory
+	while (++j < i)
+	{
+		info->map_coord[j] = info->coord[j];
+	}
+	info->map_coord[j] = '\0';
 }
 
 int	ft_check_first_lines(t_cub3d *info)
@@ -84,7 +50,6 @@ int	ft_check_first_lines(t_cub3d *info)
 
 	i = 0;
 	j = 0;
-
 	while (j < 5)
 	{
 		skip_spaces(info->coord, &i);
@@ -96,7 +61,7 @@ int	ft_check_first_lines(t_cub3d *info)
 		while (info->coord[i] && info->coord[i] == '\n')
 			i++;
 	}
-	ft_copy_the_first_lines(info, i);
+	ft_copy_the_first_lines(info, i); 
 	return (ft_check_duplicates(flag));
 }
 
@@ -159,5 +124,6 @@ int	main(int ac, char **argv)
 	// info->error = 0;
 	// info->coord = NULL;
 	// info->map_coord = NULL;
-	printf("\n%d\n", ft_check_first_lines(info));
+	printf("%d\n", ft_check_first_lines(info));
+	printf("%s\n", info->map_coord);
 }
