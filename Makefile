@@ -1,9 +1,11 @@
 NAME = cub3D
-SRC = cub3D.c get_next_line.c get_next_line_utils.c utils_1.c utils_2.c
+SRC = cub3D.c get_next_line.c get_next_line_utils.c utils_1.c utils_2.c \
+map_parse_1.c colors_check.c utils_split.c
+
 SRC_O = $(SRC:.c=.o)
 
 %.o:%.c cub3D.h get_next_line.h
-	cc -Wall -Wextra -Werror -c $< -o $@
+	cc -Wall -Wextra -Werror   -c $< -o $@ 
 
 all : $(NAME)
 
@@ -17,3 +19,4 @@ fclean : clean
 	rm -rf $(NAME)
 
 re : clean all
+#  -fsanitize=address -g 

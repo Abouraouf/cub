@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/24 12:56:01 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/09/25 17:57:00 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,37 +32,41 @@ void	ft_copy_the_first_lines(t_cub3d *info, int i)
 	int	j;
 
 	j = -1;
-	info->map_coord = malloc(i + 1);
-	if (!info->map_coord)
+	info->coord = malloc(i + 1);
+	if (!info->coord)
 		return ;// memory
 	while (++j < i)
 	{
-		info->map_coord[j] = info->coord[j];
+		info->coord[j] = info->map_coord[j];
 	}
-	info->map_coord[j] = '\0';
+	info->coord[j] = '\0';
 }
 
-int	ft_check_first_lines(t_cub3d *info)
+void	ft_check_first_lines(t_cub3d *info)
 {
 	int	i;
-	int	flag[5];
+	int	flag[6];
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (j < 5)
+	while (j < 6)
 	{
-		skip_spaces(info->coord, &i);
-		flag[j] = find_nswe(info->coord + i);
+		skip_spaces(info->map_coord, &i);
+		flag[j] = find_nswe(info->map_coord + i, info, i);
 		if (!flag[j++])
-			return (info->error = 1, 0); 
-		while (info->coord[i] && info->coord[i] != '\n')
+			return ((void)(info->error = 1));
+		while (info->map_coord[i] && info->map_coord[i] != '\n')
 			i++;
-		while (info->coord[i] && info->coord[i] == '\n')
+		while (info->map_coord[i] && info->map_coord[i] == '\n')
 			i++;
 	}
-	ft_copy_the_first_lines(info, i); 
-	return (ft_check_duplicates(flag));
+	info->place_map = i + 1;
+	ft_copy_the_first_lines(info, i);
+	if (ft_check_duplicates(flag))
+		info->error = 0;
+	else
+		info->error = 1;
 }
 
 // int	ft_check_first_lines_character(t_cub3d	*info)
@@ -101,29 +105,27 @@ int	ft_check_first_lines(t_cub3d *info)
 
 int	main(int ac, char **argv)
 {
-	(void) ac, (void) argv;
-	char *check = "NO 1 \n SO 2 \n WE 3 \n EA 4 \n F 5";
-	
 	t_cub3d	*info; //parse the second arg and init the info
-	// int		fd;
+	int		fd;
 
-	// if (ac != 2)
-	// 	return (printf("Error\n, wrong argument count\n"), 1);
+	if (ac != 2)
+		return (printf("Error\n, wrong argument count\n"), 1);
 
-	// fd = open(argv[1], O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 
-	// if (fd < 0)
-	// 	return (printf("Error\n"), 1);
-	info = malloc(sizeof(t_cub3d));
-	info->coord = check;
-	// if (!info)
-	// {
-	// 	close(fd); 
-	// 	return (printf("Error\n"), 1);
-	// }
-	// info->error = 0;
-	// info->coord = NULL;
-	// info->map_coord = NULL;
-	printf("%d\n", ft_check_first_lines(info));
-	printf("%s\n", info->map_coord);
+	if (fd < 0)
+		return (printf("Error\n"), 1);
+	info = malloc(sizeof(t_cub3d)); //
+	if (!info)
+	{
+		close(fd);
+		return (printf("Error\n"), 1);
+	}
+	ft_read_all(fd, info);
+	printf("%s", info->map_coord);
+	ft_check_first_lines(info);
+	possible_character(info);
+	ft_check_limits_floor(info);
+	ft_check_limits_ceiling(info);
+	printf("\n%d", info->error);
 }
