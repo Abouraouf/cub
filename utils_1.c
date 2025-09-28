@@ -6,31 +6,11 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:40:08 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/25 15:16:56 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/09/28 16:47:08 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-// char	**reading(char *name_of_file)
-// {
-// 	int		fd;
-// 	char	**ret;
-// 	int		i;
-
-// 	fd = open(name_of_file, O_RDONLY);
-// 	i = 0;
-
-// 	if (fd < 0)
-// 	{
-// 		printf("Error\n");
-// 		exit(1);
-// 	}
-// 	while (1)
-// 	{
-
-// 	}
-// }
 
 void	ft_read_all(int fd, t_cub3d *info)
 {

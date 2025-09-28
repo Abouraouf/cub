@@ -6,26 +6,11 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/25 17:57:00 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/09/28 17:04:23 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-// this one checks the first line
-// int	ft_check_first_lines(t_cub3d	*info)
-// {
-// 	int	i;
-// 	int	ret;
-
-// 	ret = find_nswe(info->coord[i]);
-// 	i = 0;
-// 	while (info->coord[i])
-// 	{
-// 		if (!ret)
-// 			return (ret);
-// 	}
-// }
 
 void	ft_copy_the_first_lines(t_cub3d *info, int i)
 {
@@ -41,6 +26,7 @@ void	ft_copy_the_first_lines(t_cub3d *info, int i)
 	}
 	info->coord[j] = '\0';
 }
+
 
 void	ft_check_first_lines(t_cub3d *info)
 {
@@ -69,39 +55,14 @@ void	ft_check_first_lines(t_cub3d *info)
 		info->error = 1;
 }
 
-// int	ft_check_first_lines_character(t_cub3d	*info)
-// {
-	
-// }
-
-// int	ft_check_first_lines_files(t_cub3d	*info)
-// {
-	
-// }
-
-// void	ft_take_coord(t_cub3d *info)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	flag;
-
-// 	flag = 0;
-// 	j = 0;
-// 	i = 0;
-// 	// if (!ft_check_first_lines(info) || !ft_check_first_lines_character(info)
-// 	// 	|| !ft_check_first_lines_files(info))
-// 	// 	return (info->error = 1);
-// 	// while (info->map_coord[i])
-// 	// {
-// 	// 	if ()
-// 	// }
-// }
-
-// int	parse_all(int fd, t_cub3d *info)
-// {
-// 	ft_read_all (fd, info);
-// 	ft_take_coord(info);
-// }
+void	ft_check_all_above(t_cub3d *info)
+{
+	ft_check_first_lines(info);
+	possible_character(info);
+	ft_check_limits_floor(info);
+	ft_check_limits_ceiling(info); //handle the exit if anything happens
+	ft_check_map_borders(info);
+}
 
 int	main(int ac, char **argv)
 {
@@ -122,10 +83,9 @@ int	main(int ac, char **argv)
 		return (printf("Error\n"), 1);
 	}
 	ft_read_all(fd, info);
-	printf("%s", info->map_coord);
-	ft_check_first_lines(info);
-	possible_character(info);
-	ft_check_limits_floor(info);
-	ft_check_limits_ceiling(info);
-	printf("\n%d", info->error);
+	if (!info->map_coord)
+		return 1; //free and the other shyyt
+	// printf("%s", info->map_coord);
+	ft_check_all_above(info);
 }
+ 
