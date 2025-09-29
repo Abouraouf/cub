@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/28 17:04:23 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/09/29 10:51:37 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_copy_the_first_lines(t_cub3d *info, int i)
 		info->coord[j] = info->map_coord[j];
 	}
 	info->coord[j] = '\0';
+	info->first_lines = ft_split(info->coord, '\n');
 }
 
 
@@ -47,7 +48,7 @@ void	ft_check_first_lines(t_cub3d *info)
 		while (info->map_coord[i] && info->map_coord[i] == '\n')
 			i++;
 	}
-	info->place_map = i + 1;
+	info->place_map = i;
 	ft_copy_the_first_lines(info, i);
 	if (ft_check_duplicates(flag))
 		info->error = 0;
@@ -85,7 +86,11 @@ int	main(int ac, char **argv)
 	ft_read_all(fd, info);
 	if (!info->map_coord)
 		return 1; //free and the other shyyt
-	// printf("%s", info->map_coord);
 	ft_check_all_above(info);
+	for (size_t i = 0; info->first_lines[i]; i++)
+	{
+		printf("%s\n", info->first_lines[i]);
+	}
+	
 }
  
