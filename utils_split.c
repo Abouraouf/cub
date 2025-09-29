@@ -6,13 +6,13 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:12:00 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/25 15:13:50 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/09/29 11:07:12 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	ft_free(char **str)
+void	ft_free(char **str)
 {
 	int	i;
 

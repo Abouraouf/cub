@@ -6,11 +6,40 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/29 10:51:37 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/09/29 16:03:56 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	free_in_case(t_cub3d *info, int i) // if 0 free everything and close file descriptors if 1 free useless
+{
+	if (i == 0)
+	{
+		free(info->coord);
+		info->coord = NULL;
+		free(info->map_coord);
+		info->map_coord = NULL;
+		if (info->fd >= 0)
+			close(info->fd);
+		exit(0);
+	}
+	if (i == 1)
+	{
+		ft_free(info->first_lines);
+		info->first_lines= NULL;
+		ft_free(info->ones_zeros);
+		info->ones_zeros = NULL;
+		free(info->coord);
+		info->coord = NULL;
+		free(info->map_coord);
+		info->map_coord = NULL;
+		if (info->fd >= 0)
+			close(info->fd);
+		free(info);
+		return (printf("Error\n"), exit(1));
+	}
+}
 
 void	ft_copy_the_first_lines(t_cub3d *info, int i)
 {
@@ -19,13 +48,15 @@ void	ft_copy_the_first_lines(t_cub3d *info, int i)
 	j = -1;
 	info->coord = malloc(i + 1);
 	if (!info->coord)
-		return ;// memory
+		free_in_case(info, 1);
 	while (++j < i)
 	{
 		info->coord[j] = info->map_coord[j];
 	}
 	info->coord[j] = '\0';
 	info->first_lines = ft_split(info->coord, '\n');
+	if (!info->first_lines)
+		free_in_case(info, 1);
 }
 
 
@@ -59,9 +90,20 @@ void	ft_check_first_lines(t_cub3d *info)
 void	ft_check_all_above(t_cub3d *info)
 {
 	ft_check_first_lines(info);
+	if (info->error == 1)
+		return ;
 	possible_character(info);
+	if (info->error == 1)
+		return ;
 	ft_check_limits_floor(info);
+	if (info->error == 1)
+		return ;
 	ft_check_limits_ceiling(info); //handle the exit if anything happens
+	if (info->error == 1)
+		return ;
+	ft_check_if_empty(info);
+	if (info->error == 1)
+		return ;
 	ft_check_map_borders(info);
 }
 
@@ -74,23 +116,17 @@ int	main(int ac, char **argv)
 		return (printf("Error\n, wrong argument count\n"), 1);
 
 	fd = open(argv[1], O_RDONLY);
-
 	if (fd < 0)
 		return (printf("Error\n"), 1);
 	info = malloc(sizeof(t_cub3d)); //
 	if (!info)
-	{
-		close(fd);
-		return (printf("Error\n"), 1);
-	}
+		free_in_case(info, 1);
 	ft_read_all(fd, info);
 	if (!info->map_coord)
-		return 1; //free and the other shyyt
+		free_in_case(info, 1);
 	ft_check_all_above(info);
-	for (size_t i = 0; info->first_lines[i]; i++)
-	{
-		printf("%s\n", info->first_lines[i]);
-	}
-	
+	if (info->error == 1)
+		free_in_case(info, 1);
+	free_in_case(info, 0);
 }
  

@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:40:08 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/28 16:47:08 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:50:28 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,19 @@
 void	ft_read_all(int fd, t_cub3d *info)
 {
 	char	*tmp;
+	char	*tmp_join = NULL;
 
 	info->map_coord = NULL;
+	info->fd = fd;
 	while (1)
 	{
 		tmp = get_next_line(fd);
 		if (!tmp)
 			break ;
+		tmp_join = info->map_coord;
 		info->map_coord = ft_strjoin(info->map_coord, tmp);
 		free(tmp);
+		free(tmp_join);
 		tmp = NULL;
 	}
 }

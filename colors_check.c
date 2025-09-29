@@ -43,21 +43,6 @@ int	count_strings(char **array)
 	return (i);
 }
 
-void	free_split_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	if (!array)
-		return ;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
-
 int	ft_is_all_digits(const char *str)
 {
 	int	i;
@@ -125,12 +110,12 @@ void	process_and_validate_split(char *line, t_cub3d *info, char f_or_c)
 	split_colors = ft_split(temp_line, ',');
 	if (count_strings(split_colors) != 3)
 	{
-		free_split_array(split_colors);
+		ft_free(split_colors);
 		info->error = 1;
 		return ;
 	}
 	validate_color_values(split_colors, info);
-	free_split_array(split_colors);
+	ft_free(split_colors);
 }
 
 void	check_color_line(t_cub3d *info, char type)

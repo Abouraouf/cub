@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:29:55 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/28 17:49:16 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/09/29 15:41:33 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 
 typedef struct s_cub3d
 {
+	char	**first_lines;
+	char	**ones_zeros;
+	int		fd;
 	int		rows;
 	char	*map_coord;
 	char	*coord;
-	char	**first_lines;
-	char	**ones_zeros;
 	int		error;
-	int		files;
 	int		place_map;
 	int		ceiling;
 	int		floor;
@@ -45,6 +45,9 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 void	ft_check_limits_floor(t_cub3d	*info);
 void	ft_check_limits_ceiling(t_cub3d	*info);
 void	ft_check_map_borders(t_cub3d *info);
+void	ft_check_if_empty(t_cub3d *info);
+void	ft_free(char **str);
+void	free_in_case(t_cub3d *info, int i);
 
 
 #endif
