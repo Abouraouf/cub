@@ -1,7 +1,8 @@
-NO sda.xpm
-SO textures/test/south.xpm
-WE textures/test/west.xpm
-EA textures/test/east.xpm
+NO maps/xpm/1.xpm
+SO maps/xpm/1 copy.xpm
+WE maps/xpm/1 copy 3.xpm
+EA maps/xpm/1 copy 2.xpm
+
 
 F 20,20,20
 C 200,200,255

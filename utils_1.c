@@ -6,11 +6,36 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:40:08 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/10 17:26:05 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/10 18:48:18 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	ft_open_xpm(t_cub3d *info)
+{
+	int		fd[4];
+	int 	i;
+
+	i = 0;
+	while (info->xpm_files[i])
+	{
+		fd[i] = open(info->xpm_files[i], O_RDONLY);
+		if (fd[i] < 0)
+		{
+			close(fd[0]);
+			close(fd[1]);
+			close(fd[2]);
+			close(fd[3]);
+			info->error = 1;
+		}
+		i++;
+	}
+	close(fd[0]);
+	close(fd[1]);
+	close(fd[2]);
+	close(fd[3]);
+}
 
 int	skip_from_end(char *str, int *i)
 {
@@ -43,6 +68,7 @@ void	trim_xpm(t_cub3d *info)
 		i++;
 	}
 	info->xpm_files[i] = NULL;
+	ft_open_xpm(info);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
