@@ -48,13 +48,13 @@ int	ft_is_all_digits(const char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\t')
+	while (str[i] == ' ')
 		i++;
 	if (str[i] == '\0')
 		return (0);
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
-	while (str[i] == ' ' || str[i] == '\t')
+	while (str[i] == ' ')
 		i++;
 	return (str[i] == '\0');
 }

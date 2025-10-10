@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 15:10:25 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/29 16:03:12 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/10 14:22:23 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,26 @@ int	check_if_player(char *str)
 
 void    ft_check_if_empty(t_cub3d *info)
 {
-    int i;
-    int has_content_on_line;
+	int	i;
+	int	has_content_on_line;
 
-    has_content_on_line = 0;
-    i = info->place_map;
-    while (info->map_coord[i])
-    {
-        if (info->map_coord[i] != ' ' && info->map_coord[i] != '\t'
-            && info->map_coord[i] != '\n')
-            has_content_on_line = 1;
-        if (info->map_coord[i] == '\n')
-        {
-            if (has_content_on_line == 0)
-            {
-                info->error = 1;
-                return;
-            }
-            has_content_on_line = 0;
-        }
-        i++;
-    }
+	has_content_on_line = 0;
+	i = info->place_map;
+	while (info->map_coord[i])
+	{
+		if (info->map_coord[i] != ' ')
+			has_content_on_line = 1;
+		if (info->map_coord[i] == '\n')
+		{
+			if (has_content_on_line == 0)
+			{
+				info->error = 1;
+				return ;
+			}
+			has_content_on_line = 0;
+		}
+		i++;
+	}
 }
 
 int	ft_check_surr(char **str, int j, int i)
@@ -53,9 +52,9 @@ int	ft_check_surr(char **str, int j, int i)
 	length = ft_strlen(str[i]);
 	if (str[i][j] == '0' || check_if_player(str[i] + j))
 	{
-		if (str[i + 1][j] == ' ' || str[i - 1][j] == ' ')
+		if (str[i + 1][j] == ' ' || str[i - 1][j] == ' ' || j >= (int)ft_strlen(str[i - 1]))
 			return (0);
-		if (str[i][j + 1] && ((str[i][j + 1] == ' ') || (str[i][j - 1] == ' ')))
+		if (str[i][j + 1] && ((str[i][j + 1] == ' ') || (str[i][j - 1] == ' ') || j >= (int)ft_strlen(str[i + 1])))
 			return (0);
 		if (!str[i][j + 1])
 			return (0);
@@ -65,7 +64,7 @@ int	ft_check_surr(char **str, int j, int i)
 	return (1);
 }
 
-int	calculate_lines(char **str)
+int	calculate_lines(char **str) // get back here
 {
 	int	i;
 	int	j;
@@ -99,8 +98,7 @@ void	check_after_finish(t_cub3d *info, int i)
 {
 	while (info->map_coord[i])
 	{
-		if ((info->map_coord[i] >= 9 && info->map_coord[i] <= 13)
-			|| info->map_coord[i] == 32)
+		if (info->map_coord[i] == ' ')
 			return ((void)(info->error = 0));
 		else
 			return ((void)(info->error = 1));
@@ -145,7 +143,6 @@ void	ft_check_up_down(t_cub3d *info)
 
 	i = 0;
 	lines = calculate_lines(info->ones_zeros);
-	printf("this is the line %s\n", info->ones_zeros[lines]);
 	while (info->ones_zeros[i])
 	{
 		j = 0;
@@ -160,8 +157,6 @@ void	ft_check_up_down(t_cub3d *info)
 			break ;
 		i = lines;
 	}
-	printf("%s\n", info->ones_zeros[i]);
-
 }
 
 void	ft_check_middle(t_cub3d	*info)
@@ -180,6 +175,7 @@ void	ft_check_middle(t_cub3d	*info)
 		while (info->ones_zeros[i][j])
 		{
 			if (j == 0 && (info->ones_zeros[i][j] == '0'
+				|| check_if_player(info->ones_zeros[i] + j)
 				|| info->ones_zeros[i][ft_strlen(info->ones_zeros[i])] == '0'))
 				return ((void)(info->error = 1));
 			if (!ft_check_surr(info->ones_zeros, j, i))
@@ -190,7 +186,7 @@ void	ft_check_middle(t_cub3d	*info)
 	}
 }
 
-void	ft_check_map_borders(t_cub3d *info)
+void	ft_check_map_borders(t_cub3d	*info)
 {
 	info->ones_zeros = ft_split (info->map_coord + info->place_map, '\n');
 	if (!info->ones_zeros)
