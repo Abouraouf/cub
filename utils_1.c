@@ -6,11 +6,66 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:40:08 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/29 14:50:28 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/10 17:26:05 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	skip_from_end(char *str, int *i)
+{
+	while (str[(*i)++]){}
+	(*i)--;
+	while (*i > 0 && str[(*i)--] == ' '){}
+	return (*i);
+}
+
+void	trim_xpm(t_cub3d *info)
+{
+	int	i;
+	int	j;
+	int	start;
+	int	finish;
+
+	finish = 0;
+	i = 0;
+	info->xpm_files = malloc(sizeof(char *) * 5);
+	while (i < 4)
+	{
+		j = 0;
+		skip_spaces(info->first_lines[i], &j);
+		while (info->first_lines[i][j] && info->first_lines[i][j] != ' ')
+			j++;
+		skip_spaces(info->first_lines[i], &j);
+		start = j;
+		finish = skip_from_end(info->first_lines[i], &j);
+		info->xpm_files[i] = ft_substr(info->first_lines[i], start, finish);
+		i++;
+	}
+	info->xpm_files[i] = NULL;
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t				i;
+	size_t				lenght;
+	char				*sub;
+
+	if (!s)
+		return (NULL);
+	lenght = ft_strlen(s);
+	if (start >= lenght)
+		return (ft_strdup(""));
+	if (lenght - start < len)
+		i = lenght - start;
+	else
+		i = len;
+	sub = (char *)malloc (sizeof(char) * i + 1);
+	if (!sub)
+		return (NULL);
+	ft_strlcpy(sub, s + start, i + 1);
+	return (sub);
+}
 
 void	ft_read_all(int fd, t_cub3d *info)
 {

@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 15:10:25 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/10 14:22:23 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:26:31 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ int	ft_check_surr(char **str, int j, int i)
 	length = ft_strlen(str[i]);
 	if (str[i][j] == '0' || check_if_player(str[i] + j))
 	{
-		if (str[i + 1][j] == ' ' || str[i - 1][j] == ' ' || j >= (int)ft_strlen(str[i - 1]))
+		if (str[i + 1][j] == ' ' || str[i - 1][j] == ' '
+			|| j >= (int)ft_strlen(str[i - 1]))
 			return (0);
-		if (str[i][j + 1] && ((str[i][j + 1] == ' ') || (str[i][j - 1] == ' ') || j >= (int)ft_strlen(str[i + 1])))
+		if (str[i][j + 1] && ((str[i][j + 1] == ' ')
+			|| (str[i][j - 1] == ' ') || j >= (int)ft_strlen(str[i + 1])))
 			return (0);
 		if (!str[i][j + 1])
 			return (0);

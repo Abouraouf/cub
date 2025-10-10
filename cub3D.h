@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:29:55 by eabourao          #+#    #+#             */
-/*   Updated: 2025/09/29 15:41:33 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/10 17:21:14 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef struct s_cub3d
 {
 	char	**first_lines;
+	char	**xpm_files;
 	char	**ones_zeros;
 	int		fd;
 	int		rows;
@@ -48,6 +49,8 @@ void	ft_check_map_borders(t_cub3d *info);
 void	ft_check_if_empty(t_cub3d *info);
 void	ft_free(char **str);
 void	free_in_case(t_cub3d *info, int i);
+void	trim_xpm(t_cub3d *info);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 
 #endif

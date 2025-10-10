@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/10 14:17:01 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/10 17:27:10 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void ft_init(t_cub3d *info)
 {
 	info->coord = NULL;
+	info->xpm_files = NULL;
 	info->first_lines = NULL;
 	info->ones_zeros = NULL;
 	info->map_coord = NULL;
@@ -43,8 +44,7 @@ void		check_xpm(t_cub3d *info)
 				j++;
 			while (info->first_lines[i][--j] == ' ')
 			{}
-			j++;
-			if (!check_end_xpm(info->first_lines[i] + j - 4))
+			if (!check_end_xpm(info->first_lines[i] + j - 3)) //test later
 				return ((void)(info->error = 1));
 		}
 		else
@@ -65,13 +65,14 @@ void	free_in_case(t_cub3d *info, int i) // if 0 free everything and close file d
 			close(info->fd);
 		exit(0);
 	}
-	
 	if (i == 1)
 	{
 		ft_free(info->first_lines);
 		info->first_lines= NULL;
 		ft_free(info->ones_zeros);
 		info->ones_zeros = NULL;
+		ft_free(info->xpm_files);
+		info->xpm_files = NULL;
 		free(info->coord);
 		info->coord = NULL;
 		free(info->map_coord);
@@ -189,9 +190,9 @@ int	main(int ac, char **argv)
 		if (!info->map_coord)
 			free_in_case(info, 1);
 		ft_check_all_above(info);
+		trim_xpm(info);	
 	}
 	if (info->error == 1)
 		free_in_case(info, 1);
 	free_in_case(info, 0);
 }
- 
