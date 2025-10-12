@@ -8,12 +8,11 @@
 #include <math.h>
 #include <stdbool.h>
 
-# define M_PI	3.14159265358979323846
-# define M_PI_2	1.57079632679489661923
+#define M_PI 3.14159265358979323846
+#define M_PI_2 1.57079632679489661923
 #define WIDTH 2000
 #define HEIGHT 1500
-#define MINIMAP_WIDTH 20
-#define MINIMAP_HEIGHT 10
+#define FOV (M_PI / 3.0)
 #define TILE 32
 
 typedef struct s_img
@@ -32,23 +31,27 @@ typedef struct s_info
 	char	**map;
 	void	*mlx;
 	void	*win;
-	t_img	*wall_img;
-	t_img	*player_img;
-	t_img	*void_img;
+	t_img	*screen;
 	double	pa;
 	double	py_px;
 	double	px_px;
 	int		map_height;
 	int		map_width;
+	double	distToProjPlane;
 } t_info;
 
-typedef struct {
-    double dist;      // perpendicular distance (map units)
-    int mapX, mapY;   // the hit cell
-    int side;         // 0 vertical, 1 horizontal
-    double hitX, hitY; // hit world coords (map units)
-} RayHit;
+typedef struct s_ray{
+    double dist;
+    int mapX, mapY;
+    int side;
+    double hitX, hitY;
+} t_ray;
 
+void	draw_column_on_screen(int coor[2], int x, int color, t_info *i);
+t_img	*rectangle(void *mlx, int width, int height, int color);
+t_img	*screen(void *mlx, int height, int width);
+int		draw_columns(t_info *i);
+double	dtor(double degree);
 int		mlx_close(t_info *minimap);
 int		key_press(int keycode, void *var);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);

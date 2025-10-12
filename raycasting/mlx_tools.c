@@ -6,11 +6,61 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 11:41:32 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/06 16:33:25 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/10 13:50:59 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minimap.h"
+
+void	draw_column_on_screen(int coor[2], int x, int color, t_info *i)
+{
+	int	iter;
+
+	iter = coor[0];
+	while (iter < coor[1])
+	{
+		my_mlx_pixel_put(i->screen, x, iter, color);
+		iter++;
+	}
+}
+
+t_img	*screen(void *mlx, int height, int width)
+{
+	t_img	*new;
+
+	new = malloc(sizeof(t_img));
+	new->height = height;
+	new->width = width;
+	new->img_ptr = mlx_new_image(mlx, width, height);
+	new->addr = mlx_get_data_addr(new->img_ptr, &new->bits_per_pixel, &new->line_length, &new->endian);
+	return (new);
+}
+
+t_img *rectangle(void *mlx, int width, int height, int color)
+{
+	t_img	*new;
+	int		x;
+	int		y;
+
+	x = 0;
+	y = 0;
+	new = malloc(sizeof(t_img));
+	new->height = height;
+	new->width = width;
+	new->img_ptr = mlx_new_image(mlx, width, height);
+	new->addr = mlx_get_data_addr(new->img_ptr, &new->bits_per_pixel, &new->line_length, &new->endian);
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			my_mlx_pixel_put(new, x, y, color);
+			x++;
+		}
+		y++;
+	}
+	return (new);
+}
 
 int key_press(int keycode, void *var)
 {
@@ -51,11 +101,8 @@ int mlx_close(t_info *minimap)
 
 	mlx_clear_window(minimap->mlx, minimap->win);
 	mlx_destroy_window(minimap->mlx, minimap->win);
-	mlx_destroy_image(minimap->mlx, minimap->player_img->img_ptr);
-	mlx_destroy_image(minimap->mlx, minimap->wall_img->img_ptr);
+	//mlx_destroy_image(minimap->mlx, minimap->screen->img_ptr);
 	mlx_destroy_display(minimap->mlx);
-	free(minimap->wall_img);
-	free(minimap->player_img);
 	free(minimap->mlx);
 	free(minimap);
 	exit(0);

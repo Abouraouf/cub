@@ -1,0 +1,4 @@
+#!/bin/zsh
+cc main.c mlx_tools.c dda.c -lmlx -lX11 -lXext -lm -o cub
+./cub
+echo $?
