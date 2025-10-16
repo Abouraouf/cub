@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 09:56:29 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/10 17:07:39 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 10:57:30 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(void)
 		"100010000000000000000000000000010001",
 		"100010000110010000000000001110000001",
 		"100000000000011111000000110001110001",
-		"1010000P1111110000011110001110111101",
+		"1010010P1111110000011110001110111101",
 		"101001001000011110000000011110000001",
 		"101001000000011100000000000000000101",
 		"101001000000000000000000000000110001",
@@ -62,6 +62,15 @@ int	main(void)
 	minimap->map_width = 36;
 	minimap->screen = screen(minimap->mlx, HEIGHT, WIDTH);
 	minimap->pa = dtor(270);
+	minimap->textures = malloc(sizeof(t_img) * 4);
+	minimap->textures[0].img_ptr =  mlx_xpm_file_to_image(minimap->mlx, "./textures/greystone.xpm", &minimap->textures[0].width, &minimap->textures[0].height);
+	minimap->textures[0].addr =  mlx_get_data_addr(minimap->textures[0].img_ptr, &minimap->textures[0].bits_per_pixel, &minimap->textures[0].line_length, &minimap->textures[0].endian);
+	minimap->textures[1].img_ptr =  mlx_xpm_file_to_image(minimap->mlx, "./textures/mossy.xpm", &minimap->textures[1].width, &minimap->textures[1].height);
+	minimap->textures[1].addr =  mlx_get_data_addr(minimap->textures[1].img_ptr, &minimap->textures[1].bits_per_pixel, &minimap->textures[1].line_length, &minimap->textures[1].endian);
+	minimap->textures[2].img_ptr =  mlx_xpm_file_to_image(minimap->mlx, "./textures/wood.xpm", &minimap->textures[2].width, &minimap->textures[2].height);
+	minimap->textures[2].addr =  mlx_get_data_addr(minimap->textures[2].img_ptr, &minimap->textures[2].bits_per_pixel, &minimap->textures[2].line_length, &minimap->textures[2].endian);
+	minimap->textures[3].img_ptr =  mlx_xpm_file_to_image(minimap->mlx, "./textures/colorstone.xpm", &minimap->textures[3].width, &minimap->textures[3].height);
+	minimap->textures[3].addr =  mlx_get_data_addr(minimap->textures[3].img_ptr, &minimap->textures[3].bits_per_pixel, &minimap->textures[3].line_length, &minimap->textures[3].endian);
 	mlx_loop_hook(minimap->mlx, frame, minimap);
 	mlx_key_hook(minimap->win, key_press, minimap);
 	mlx_hook(minimap->win, 17, 1L<<0, mlx_close, minimap);

@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:30:47 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/12 10:34:49 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 11:00:23 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_ray *cast_ray_dda(double Px_pixels, double Py_pixels, double ray_angle, t_info
         stepX = 1;
         sideDistX = (mapX + 1.0 - posX) * deltaDistX;
     }
-
     if (rayDirY < 0) {
         stepY = -1;
         sideDistY = (posY - mapY) * deltaDistY;
@@ -63,6 +62,8 @@ t_ray *cast_ray_dda(double Px_pixels, double Py_pixels, double ray_angle, t_info
 
     t_ray *result = malloc(sizeof(t_ray));
     result->dist = perpWallDist;
+	result->rayDirX = rayDirX;
+	result->rayDirY = rayDirY;
     result->mapX = mapX;
     result->mapY = mapY;
     result->side = side;
@@ -77,16 +78,53 @@ int draw_columns(t_info *i)
         double rayAngle = (i->pa - (FOV / 2)) + (FOV * x / (double)WIDTH);
 		if (rayAngle < 0) rayAngle += 2 * M_PI;
 		if (rayAngle >= 2 * M_PI) rayAngle -= 2 * M_PI;
-		int color = 0x000000ff;
 		t_ray *ray = cast_ray_dda(i->px_px, i->py_px, rayAngle, i);
 		int lineHeight = (int)(HEIGHT / ray->dist);
 		int drawStart = -lineHeight / 2 + HEIGHT / 2;
 		if (drawStart < 0) drawStart = 0;
 		int drawEnd = lineHeight / 2 + HEIGHT / 2;
 		if (drawEnd >= HEIGHT) drawEnd = HEIGHT - 1;
-		if (ray->side == 1) {color = 0x0000ff00;}
 		int arr[2] = {drawStart, drawEnd};
-		draw_column_on_screen(arr, x, color, i);
+		double wallX;
+		if (ray->side == 0) wallX = ray->hitY;
+		else           wallX = ray->hitX;
+		wallX -= floor((wallX));
+		int texX = (int)(wallX * (double)(texWidth));
+		if(ray->side == 0 && ray->rayDirX > 0) texX = texWidth - texX - 1;
+		if(ray->side == 1 && ray->rayDirY < 0) texX = texWidth - texX - 1;
+		double step = 1.0 * texHeight / lineHeight;
+		double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
+		int currentTexture;
+		if (ray->side == 0)
+		{
+    		if (ray->rayDirX > 0)
+        		currentTexture = 0;
+    		else
+        		currentTexture = 1;
+		}
+		else
+		{
+    		if (ray->rayDirY > 0)
+        		currentTexture = 2;
+    		else
+        		currentTexture = 3;
+		}
+		for(int y = drawStart; y<drawEnd; y++)
+      	{
+        	int texY = (int)texPos & (texHeight - 1);
+        	texPos += step;
+        	int color = *(int *)(i->textures[currentTexture].addr + (texY * i->textures[currentTexture].line_length + texX * (i->textures[currentTexture].bits_per_pixel / 8)));
+        	if(ray->side == 1) color = (color >> 1) & 8355711;
+        	draw_pixel_on_screen(x, y, color, i);
+      	}
+		for (int ii = 0; ii < drawStart - 1; ii++)
+		{
+			draw_pixel_on_screen(x, ii, CELING, i);
+		}
+		for (int ii = drawEnd; ii < HEIGHT; ii++)
+		{
+			draw_pixel_on_screen(x, ii, FLOOR, i);
+		}
 	}
 	mlx_put_image_to_window(i->mlx, i->win, i->screen->img_ptr, 0, 0);
 	return 0;

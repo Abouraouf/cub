@@ -6,11 +6,16 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 11:41:32 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/10 13:50:59 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 10:58:53 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minimap.h"
+
+void	draw_pixel_on_screen(int x, int y, int color, t_info *i)
+{
+	my_mlx_pixel_put(i->screen, x, y, color);
+}
 
 void	draw_column_on_screen(int coor[2], int x, int color, t_info *i)
 {
