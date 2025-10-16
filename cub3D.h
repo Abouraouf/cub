@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:29:55 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/10 17:21:14 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/13 16:12:33 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include "minilibx-linux/mlx.h"
 # include "get_next_line.h"
+
+typedef struct s_data {
+    void *mlx;
+    void *win;
+    int frame; // frame counter
+    // other data like image pointers, coordinates etc.
+} t_data;
 
 typedef struct s_cub3d
 {

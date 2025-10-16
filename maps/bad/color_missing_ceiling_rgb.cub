@@ -3,10 +3,10 @@ SO maps/xpm/1 copy.xpm
 WE maps/xpm/1 copy 3.xpm
 EA maps/xpm/1 copy 2.xpm
 
-
-F 20,20,20
+F 20,20,0
 C 200,200,255
 
 1111
-11E1
-111
+110E1
+1101
+11111

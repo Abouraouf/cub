@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:40:08 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/10 18:48:18 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 10:24:34 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	trim_xpm(t_cub3d *info)
 	int	start;
 	int	finish;
 
+	if (!info->first_lines)
+		return ;
 	finish = 0;
 	i = 0;
 	info->xpm_files = malloc(sizeof(char *) * 5);

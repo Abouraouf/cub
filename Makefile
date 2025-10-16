@@ -1,21 +1,26 @@
 NAME = cub3D
+
 SRC = cub3D.c get_next_line.c get_next_line_utils.c utils_1.c utils_2.c \
-map_parse_1.c colors_check.c utils_split.c
+	map_parse_1.c colors_check.c utils_split.c
 
-SRC_O = $(SRC:.c=.o)
+OBJ = $(SRC:.c=.o)
 
-%.o:%.c cub3D.h get_next_line.h
-	cc -Wall -Wextra -Werror   -c $< -o $@  -fsanitize=address -g 
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -Imlx -fsanitize=address -g
+MLX_FLAGS = -Lmlx minilibx-linux/libmlx.a -lXext -lX11 -lm
 
-all : $(NAME)
+%.o: %.c cub3D.h get_next_line.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME) : $(SRC_O)
-	cc -Wall -Wextra -Werror $(SRC_O) -o $(NAME) -fsanitize=address -g 
-clean :
-	rm -rf $(SRC_O)
+all: $(NAME)
 
-fclean : clean
-	rm -rf $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) $(MLX_FLAGS) $(CFLAGS) -o $(NAME)
 
-re : clean all
-#  -fsanitize=address -g 
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all

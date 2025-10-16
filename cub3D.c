@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/10 17:27:10 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 10:22:38 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,35 @@ void	ft_check_argv_1(t_cub3d *info, char *str)
 		return ((void)(info->error = 1));
 	info->error = 0;
 }
+
+// int animation_loop(t_data *data)
+// {
+//     mlx_clear_window(data->mlx, data->win);
+
+//     // Here update your frame data, e.g., position of objects, frame index etc.
+//     data->frame++;
+
+//     // Draw your object at new position or change the image accordingly
+//     // For example, put different image or move the sprite
+//     // mlx_put_image_to_window(data->mlx, data->win, img, x, y);
+
+//     return 0; // returning 0 keeps the loop going
+// }
+
+// int main()
+// {
+//     t_data data;
+
+//     data.mlx = mlx_init();
+//     data.win = mlx_new_window(data.mlx, 800, 600, "Animation");
+//     data.frame = 0;
+
+//     // Set your loop hook - this function will be called repeatedly
+//     mlx_loop_hook(data.mlx, animation_loop, &data);
+
+//     mlx_loop(data.mlx);
+//     return 0;
+// }
 
 int	main(int ac, char **argv)
 {
