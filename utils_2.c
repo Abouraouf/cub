@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:02:28 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/09 12:03:02 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 12:19:00 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,13 @@ int	find_nswe(char *str, t_cub3d *info, int i)
 		return (3);
 	if (!ft_strncmp(str, "EA ", 3))
 		return (4);
-	if (!ft_strncmp(str, "F ", 2))
-		return (info->floor = i, 5);
-	if (!ft_strncmp(str, "C ", 2))
-		return (info->ceiling = i, 6);
+	if (info)
+	{
+		if (!ft_strncmp(str, "F ", 2))
+			return (info->floor = i, 5);
+		if (!ft_strncmp(str, "C ", 2))
+			return (info->ceiling = i, 6);
+	}
 	return (0);
 }
 
@@ -68,4 +71,36 @@ void	skip_spaces(char *str, int *i)
 		return ;
 	while (str[*i] && str[*i] == ' ')
 		(*i)++;
+}
+
+void	order_xpm(t_cub3d *info)
+{
+	int	i;
+	int	j;
+	int placement;
+
+	i = 0;
+	info->xpm_inorder = malloc(sizeof(char *) * 5);
+	if (!info->xpm_inorder)
+		return (free_in_case(info, 1));
+	while (info->first_lines[i])
+	{
+		placement = find_nswe(info->first_lines[i], NULL,j);
+		j = 0;
+		skip_spaces(info->first_lines[i], &j);
+		if (placement > 0 && placement < 5)
+		{
+			// printf("%")
+			printf("%d\n",find_nswe(info->first_lines[i], NULL,j) - 1);
+			info->xpm_inorder[placement - 1] = info->xpm_files[i];
+		}
+		i++;
+	}
+	// printf("%d\n", i);
+	info->xpm_inorder[4] = NULL;
+	for (int i = 0;info->xpm_inorder[i] ; i++)
+	{
+		printf("%s\n",info->xpm_inorder[i]);
+	}
+	
 }

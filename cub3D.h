@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:29:55 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/13 16:12:33 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 12:03:00 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,11 @@
 # include "minilibx-linux/mlx.h"
 # include "get_next_line.h"
 
-typedef struct s_data {
-    void *mlx;
-    void *win;
-    int frame; // frame counter
-    // other data like image pointers, coordinates etc.
-} t_data;
-
 typedef struct s_cub3d
 {
 	char	**first_lines;
 	char	**xpm_files;
+	char	**xpm_inorder;
 	char	**ones_zeros;
 	int		fd;
 	int		rows;
@@ -59,6 +53,6 @@ void	ft_free(char **str);
 void	free_in_case(t_cub3d *info, int i);
 void	trim_xpm(t_cub3d *info);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-
+void	order_xpm(t_cub3d *info);
 
 #endif

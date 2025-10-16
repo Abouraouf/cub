@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/16 10:22:38 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 12:29:49 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	free_in_case(t_cub3d *info, int i) // if 0 free everything and close file d
 	}
 	if (i == 1)
 	{
+		// free(info->xpm_inorder);
 		ft_free(info->first_lines);
 		info->first_lines= NULL;
 		ft_free(info->ones_zeros);
@@ -149,7 +150,6 @@ void	ft_check_all_above(t_cub3d *info)
 	if (info->error == 1)
 		return ;
 	check_xpm(info);
-
 }
 
 void	ft_check_argv_1(t_cub3d *info, char *str)
@@ -219,7 +219,9 @@ int	main(int ac, char **argv)
 		if (!info->map_coord)
 			free_in_case(info, 1);
 		ft_check_all_above(info);
-		trim_xpm(info);	
+		trim_xpm(info);
+	// order_xpm(info);
+
 	}
 	if (info->error == 1)
 		free_in_case(info, 1);
