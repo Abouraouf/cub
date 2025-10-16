@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 11:41:32 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 11:30:24 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 15:14:21 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,32 +38,6 @@ t_img	*screen(void *mlx, int height, int width)
 	new->width = width;
 	new->img_ptr = mlx_new_image(mlx, width, height);
 	new->addr = mlx_get_data_addr(new->img_ptr, &new->bits_per_pixel, &new->line_length, &new->endian);
-	return (new);
-}
-
-t_img *rectangle(void *mlx, int width, int height, int color)
-{
-	t_img	*new;
-	int		x;
-	int		y;
-
-	x = 0;
-	y = 0;
-	new = malloc(sizeof(t_img));
-	new->height = height;
-	new->width = width;
-	new->img_ptr = mlx_new_image(mlx, width, height);
-	new->addr = mlx_get_data_addr(new->img_ptr, &new->bits_per_pixel, &new->line_length, &new->endian);
-	while (y < height)
-	{
-		x = 0;
-		while (x < width)
-		{
-			my_mlx_pixel_put(new, x, y, color);
-			x++;
-		}
-		y++;
-	}
 	return (new);
 }
 
