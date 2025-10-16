@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 09:56:29 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 17:24:09 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 20:09:44 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,17 @@ int	main(int ac, char **argv)
 	t_info *minimap;
 
 	p = parsing(ac, argv);
-	exit(0);
 	minimap = malloc(sizeof(t_info));
 	minimap->distToProjPlane = (WIDTH / 2) / tan(dtor(60) / 2);
 	minimap->map = p->ones_zeros;
 	minimap->mlx = mlx_init();
 	minimap->win = mlx_new_window(minimap->mlx, WIDTH, HEIGHT, "TITLE");
-	minimap->px_px = 7 * TILE;
-	minimap->py_px = 4 * TILE;
-	minimap->floor = p->floor;
-	minimap->celing = p->ceiling;
-	minimap->map_height = 12;
-	minimap->map_width = 36;
+	minimap->px_px = p->player_y * TILE;
+	minimap->py_px = p->player_x * TILE;
+	minimap->floor = FLOOR;
+	minimap->celing = CELING;
+	minimap->map_height = p->rows + 1;
+	minimap->map_width = 0;
 	minimap->screen = screen(minimap->mlx, HEIGHT, WIDTH);
 	minimap->pa = dtor(270);
 	minimap->textures = malloc(sizeof(t_img) * 4);

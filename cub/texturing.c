@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:45:38 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 16:21:08 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:34:56 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int draw_columns(t_info *i)
 		if(ray->side == 0 && ray->rayDirX > 0) ray->texX = texWidth - ray->texX - 1;
 		if(ray->side == 1 && ray->rayDirY < 0) ray->texX = texWidth - ray->texX - 1;
 		textures(ray, i, x, 0);
-		(floorAndceling(ray->drawStart, ray->drawEnd, x, i), x++);
+		(x++);
 	}
 	mlx_put_image_to_window(i->mlx, i->win, i->screen->img_ptr, 0, 0);
 	return (free(ray), 0);

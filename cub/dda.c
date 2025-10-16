@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:30:47 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 16:20:44 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 20:11:28 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_ray *cast_ray_dda(double ray_angle, t_info *m)
 			result->mapY += result->stepY;
 			result->side = 1;
 		}
-		if (result->mapY >= m->map_height || result->mapX >= m->map_width
+		if (result->mapY >= m->map_height || result->mapX >= (int)ft_strlen(m->map[result->mapY])
 				|| result->mapX < 0 || result->mapY < 0)
 			return (free(result), NULL);
 		if (m->map[result->mapY][result->mapX] == '1')

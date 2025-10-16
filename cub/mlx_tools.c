@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 11:41:32 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 15:56:42 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:28:59 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->addr + ((y * data->line_length) + (x * (data->bits_per_pixel / 8)));
 	*(unsigned int*)dst = color;
 }
