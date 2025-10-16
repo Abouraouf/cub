@@ -6,11 +6,11 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:45:38 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 15:15:20 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:21:08 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minimap.h"
+#include "cub3D.h"
 
 void	floorAndceling(int drawStart, int drawEnd, int x, t_info *i);
 double	calc_ray_angle(t_info *i, int x);
@@ -22,7 +22,6 @@ void calc_text_coor(t_ray *ray, int drawStart, int lineHeight)
 	int texX;
 	double step;
 	double texPos;
-	int currentTexture;
 
 	if (ray->side == 0)
 		wallX = ray->hitY;

@@ -6,11 +6,11 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:59:10 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 15:07:31 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 15:56:42 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minimap.h"
+#include "cub3D.h"
 
 void	ray_init2(t_ray *result)
 {

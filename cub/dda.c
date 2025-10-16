@@ -6,11 +6,11 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:30:47 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 15:07:50 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:20:44 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minimap.h"
+#include "cub3D.h"
 
 void	ray_init2(t_ray *result);
 
@@ -38,7 +38,7 @@ void	calc_dist(t_ray *result)
 	result->hitY = result->posY + result->rayDirY * result->dist;
 }
 
-t_ray *cast_ray_dda(double ray_angle, t_info *m, int x)
+t_ray *cast_ray_dda(double ray_angle, t_info *m)
 {
 	t_ray	*result;
 
@@ -84,13 +84,13 @@ void floorAndceling(int drawStart, int drawEnd, int x, t_info *i)
 	ii = 0;
 	while (ii < drawStart - 1)
 	{
-		draw_pixel_on_screen(x, ii, CELING, i);
+		draw_pixel_on_screen(x, ii, i->celing, i);
 		ii++;
 	}
 	ii = drawEnd;
 	while (ii < HEIGHT)
 	{
-		draw_pixel_on_screen(x, ii, FLOOR, i);
+		draw_pixel_on_screen(x, ii, i->floor, i);
 		ii++;
 	}
 }

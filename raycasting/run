@@ -1,4 +1,0 @@
-#!/bin/zsh
-cc main.c mlx_tools.c texturing.c dda.c dda2.c -lmlx -lX11 -lXext -lm -o cub
-./cub
-echo $?
