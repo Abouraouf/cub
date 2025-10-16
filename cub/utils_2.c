@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:02:28 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/16 13:14:41 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:25:41 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,27 @@ void	order_xpm(t_cub3d *info)
 		i++;
 	}
 	info->xpm_inorder[4] = NULL;
+}
+
+void	find_player_l(t_cub3d	*info)
+{
+	int	i;
+	int	l;
+
+	i = 0;
+	while (info->ones_zeros[i])
+	{
+		l = 0;
+		while (info->ones_zeros[i][l])
+		{
+			if (check_if_player(info->ones_zeros[i] + l))
+			{
+				info->player_x = i;
+				info->player_y = l;
+			}
+			l++;
+		}
+		i++;
+	}
+	info->rows = i - 1;
 }

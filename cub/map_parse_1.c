@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 15:10:25 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/10 16:26:31 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:02:31 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_check_surr(char **str, int j, int i)
 	return (1);
 }
 
-int	calculate_lines(char **str) // get back here
+int	calculate_lines(char **str)
 {
 	int	i;
 	int	j;

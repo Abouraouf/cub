@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/16 16:18:29 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:23:49 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		check_xpm(t_cub3d *info)
 	}
 }
 
-void	free_in_case(t_cub3d *info, int i) // if 0 free everything and close file descriptors if 1 free useless
+void	 free_in_case(t_cub3d *info, int i) // if 0 free everything and close file descriptors if 1 free useless
 {
 	if (i == 0)
 	{
@@ -64,7 +64,6 @@ void	free_in_case(t_cub3d *info, int i) // if 0 free everything and close file d
 		info->map_coord = NULL;
 		if (info->fd >= 0)
 			close(info->fd);
-		exit(0);
 	}
 	if (i == 1)
 	{
@@ -160,7 +159,6 @@ void	ft_check_argv_1(t_cub3d *info, char *str)
 	i = 0;
 	while (str[i])
 		i++;
-	
 	while (str[--i] == ' ' && i > 0)
 	{}
 	if (ft_strncmp(str + i - 3, ".cub", 4))
@@ -168,9 +166,9 @@ void	ft_check_argv_1(t_cub3d *info, char *str)
 	info->error = 0;
 }
 
-t_cub3d *parsing(int ac, char **argv)
+t_cub3d	*parsing(int ac, char **argv)
 {
-	t_cub3d	*info; //parse the second arg and init the info
+	t_cub3d	*info;
 	int		fd;
 
 	if (ac != 2)
@@ -193,6 +191,7 @@ t_cub3d *parsing(int ac, char **argv)
 			free_in_case(info, 1);
 		trim_xpm(info);
 		order_xpm(info);
+		find_player_l(info);
 	}
 	if (info->error == 1)
 		free_in_case(info, 1);

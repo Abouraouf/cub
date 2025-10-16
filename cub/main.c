@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 09:56:29 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 16:00:23 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:24:09 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(int ac, char **argv)
 	t_info *minimap;
 
 	p = parsing(ac, argv);
+	exit(0);
 	minimap = malloc(sizeof(t_info));
 	minimap->distToProjPlane = (WIDTH / 2) / tan(dtor(60) / 2);
 	minimap->map = p->ones_zeros;

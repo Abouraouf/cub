@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:29:55 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/16 16:20:16 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:23:23 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_cub3d
 	int		rows;
 	char	*map_coord;
 	char	*coord;
+	int		player_x;
+	int		player_y;
 	int		error;
 	int		place_map;
 	int		ceiling;
@@ -123,5 +125,7 @@ void	trim_xpm(t_cub3d *info);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	order_xpm(t_cub3d *info);
 t_cub3d	*parsing(int ac, char **argv);
+int		check_if_player(char *str);
+void	find_player_l(t_cub3d	*info);
 
 #endif
