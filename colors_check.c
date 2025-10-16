@@ -78,28 +78,27 @@ int	ft_atoi_color(const char *str)
 	return ((int)res);
 }
 
-void	validate_color_values(char **split, t_cub3d *info)
+void	validate_color_values(char **split, t_cub3d *info, char f_or_c)
 {
-	int	i;
-	int	color_value;
+	int	r;
+	int	g;
+	int	b;
 
-	i = 0;
-	while (i < 3)
-	{
-		if (!ft_is_all_digits(split[i]))
-		{
-			info->error = 1;
-			break ;
-		}
-		color_value = ft_atoi_color(split[i]);
-		if (color_value < 0 || color_value > 255)
-		{
-			info->error = 1;
-			break ;
-		}
-		i++;
-	}
+	if (!ft_is_all_digits(split[0])
+		|| !ft_is_all_digits(split[1])
+		|| !ft_is_all_digits(split[2]))
+		return (info->error = 1, (void)0);
+	r = ft_atoi_color(split[0]);
+	g = ft_atoi_color(split[1]);
+	b = ft_atoi_color(split[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (info->error = 1, (void)0);
+	if (f_or_c == 'F')
+		info->floor = (r << 16) | (g << 8) | b;
+	else if (f_or_c == 'C')
+		info->ceiling = (r << 16) | (g << 8) | b;
 }
+
 
 void	process_and_validate_split(char *line, t_cub3d *info, char f_or_c)
 {
@@ -114,18 +113,20 @@ void	process_and_validate_split(char *line, t_cub3d *info, char f_or_c)
 		info->error = 1;
 		return ;
 	}
-	validate_color_values(split_colors, info);
+	validate_color_values(split_colors, info, f_or_c);
 	ft_free(split_colors);
 }
 
-void	check_color_line(t_cub3d *info, char type)
+void	check_color_line(t_cub3d *info,	 char type)
 {
 	char	*line_start;
 	int		i;
 	int		comma_count;
 
 	if (type == 'f')
+	{
 		line_start = info->map_coord + info->floor + 2;
+	}
 	else
 		line_start = info->map_coord + info->ceiling + 2;
 	i = 0;

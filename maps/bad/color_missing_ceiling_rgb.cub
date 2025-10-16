@@ -1,12 +1,12 @@
 NO maps/xpm/1.xpm
-WE maps/xpm/1 copy 3.xpm
-EA maps/xpm/1 copy 2.xpm
 SO maps/xpm/1 copy.xpm
+EA maps/xpm/1 copy 2.xpm
+WE maps/xpm/1 copy 3.xpm
 
-F 20,20,0
 C 200,200,255
+F 200,20,0
 
 1111
-110E1
+110E1111
 1101
 11111

@@ -6,11 +6,12 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:02:28 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/16 12:19:00 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 13:14:41 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -90,17 +91,9 @@ void	order_xpm(t_cub3d *info)
 		skip_spaces(info->first_lines[i], &j);
 		if (placement > 0 && placement < 5)
 		{
-			// printf("%")
-			printf("%d\n",find_nswe(info->first_lines[i], NULL,j) - 1);
 			info->xpm_inorder[placement - 1] = info->xpm_files[i];
 		}
 		i++;
 	}
-	// printf("%d\n", i);
 	info->xpm_inorder[4] = NULL;
-	for (int i = 0;info->xpm_inorder[i] ; i++)
-	{
-		printf("%s\n",info->xpm_inorder[i]);
-	}
-	
 }

@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:29:55 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/16 12:03:00 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 13:06:32 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_cub3d
 	char	**xpm_files;
 	char	**xpm_inorder;
 	char	**ones_zeros;
+	int		ceiling_for_mlx;
+	int		floor_for_mlx;
 	int		fd;
 	int		rows;
 	char	*map_coord;

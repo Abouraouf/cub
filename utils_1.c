@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:40:08 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/16 12:07:24 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 13:19:32 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	trim_xpm(t_cub3d *info)
 		i++;
 	}
 	info->xpm_files[i] = NULL;
-	printf("%s\n", info->xpm_files[1]);
 	ft_open_xpm(info);
 }
 

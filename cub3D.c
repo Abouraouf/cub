@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/16 12:29:49 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/16 13:20:07 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void ft_init(t_cub3d *info)
 	info->first_lines = NULL;
 	info->ones_zeros = NULL;
 	info->map_coord = NULL;
+	info->xpm_inorder = NULL;
 }
 
 int	check_end_xpm(char *str)
@@ -67,7 +68,7 @@ void	free_in_case(t_cub3d *info, int i) // if 0 free everything and close file d
 	}
 	if (i == 1)
 	{
-		// free(info->xpm_inorder);
+		free(info->xpm_inorder);
 		ft_free(info->first_lines);
 		info->first_lines= NULL;
 		ft_free(info->ones_zeros);
@@ -133,7 +134,7 @@ void	ft_check_all_above(t_cub3d *info)
 {
 	ft_check_first_lines(info);
 	if (info->error == 1)
-		return ;	
+		return ;
 	possible_character(info);
 	if (info->error == 1)
 		return ;
@@ -204,7 +205,6 @@ int	main(int ac, char **argv)
 	if (ac != 2)
 		return (printf("Error\n, wrong argument count\n"), 1);
 
-	
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (printf("Error\n"), 1);
@@ -219,9 +219,10 @@ int	main(int ac, char **argv)
 		if (!info->map_coord)
 			free_in_case(info, 1);
 		ft_check_all_above(info);
+		if(info->error == 1)
+			free_in_case(info, 1);
 		trim_xpm(info);
-	// order_xpm(info);
-
+		order_xpm(info);
 	}
 	if (info->error == 1)
 		free_in_case(info, 1);
