@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 11:41:32 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 10:58:53 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/16 11:30:24 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,14 @@ int mlx_close(t_info *minimap)
 
 	mlx_clear_window(minimap->mlx, minimap->win);
 	mlx_destroy_window(minimap->mlx, minimap->win);
-	//mlx_destroy_image(minimap->mlx, minimap->screen->img_ptr);
+	mlx_destroy_image(minimap->mlx, minimap->screen->img_ptr);
+	mlx_destroy_image(minimap->mlx, minimap->textures[0].img_ptr);
+	mlx_destroy_image(minimap->mlx, minimap->textures[1].img_ptr);
+	mlx_destroy_image(minimap->mlx, minimap->textures[2].img_ptr);
+	mlx_destroy_image(minimap->mlx, minimap->textures[3].img_ptr);
 	mlx_destroy_display(minimap->mlx);
+	free(minimap->screen);
+	free(minimap->textures);
 	free(minimap->mlx);
 	free(minimap);
 	exit(0);

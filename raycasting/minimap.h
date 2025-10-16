@@ -47,12 +47,20 @@ typedef struct s_info
 } t_info;
 
 typedef struct s_ray{
-    double dist;
-    int mapX, mapY;
-    int side;
-    double hitX, hitY;
-	double rayDirX;
-	double rayDirY;
+	int		mapX, mapY;
+    int		side;
+	int		stepX, stepY;
+	int		lineHeight;
+	int		drawEnd;
+	int		drawStart;
+    double	dist;
+    double	hitX, hitY;
+	double	rayDirX;
+	double	rayDirY;
+	double	posX, posY;
+	double	deltaDistX, deltaDistY;
+	double	sideDistX, sideDistY;
+	double	texX;
 } t_ray;
 
 void	draw_pixel_on_screen(int x, int y, int color, t_info *i);
