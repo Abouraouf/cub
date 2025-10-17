@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:30:47 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 20:11:28 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/17 10:42:16 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	ray_init(t_ray *result, t_info *m, double ray_angle)
 void	calc_dist(t_ray *result)
 {
 	if (result->side == 0)
-		result->dist = (result->mapX - result->posX + (1 - result->stepX) / 2.0) / result->rayDirX;
+		result->dist = (result->mapX - result->posX + ((1 - result->stepX) / 2.0)) / result->rayDirX;
 	else
-		result->dist = (result->mapY - result->posY + (1 - result->stepY) / 2.0) / result->rayDirY;
+		result->dist = (result->mapY - result->posY + ((1 - result->stepY) / 2.0)) / result->rayDirY;
 	result->hitX = result->posX + result->rayDirX * result->dist;
 	result->hitY = result->posY + result->rayDirY * result->dist;
 }
@@ -58,8 +58,8 @@ t_ray *cast_ray_dda(double ray_angle, t_info *m)
 			result->mapY += result->stepY;
 			result->side = 1;
 		}
-		if (result->mapY >= m->map_height || result->mapX >= (int)ft_strlen(m->map[result->mapY])
-				|| result->mapX < 0 || result->mapY < 0)
+		if (result->mapY >= m->map_height || result->mapY < 0 || result->mapX >= (int)ft_strlen(m->map[result->mapY])
+				|| result->mapX < 0)
 			return (free(result), NULL);
 		if (m->map[result->mapY][result->mapX] == '1')
 			break;
@@ -70,6 +70,7 @@ t_ray *cast_ray_dda(double ray_angle, t_info *m)
 double	calc_ray_angle(t_info *i, int x)
 {
 	double rayAngle = (i->pa - (FOV / 2)) + (FOV * x / (double)WIDTH);
+
 	if (rayAngle < 0)
 		rayAngle += 2 * M_PI;
 	if (rayAngle >= 2 * M_PI)

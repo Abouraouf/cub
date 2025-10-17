@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 09:56:29 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 20:09:44 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/17 10:42:51 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ int	main(int ac, char **argv)
 	minimap->map = p->ones_zeros;
 	minimap->mlx = mlx_init();
 	minimap->win = mlx_new_window(minimap->mlx, WIDTH, HEIGHT, "TITLE");
-	minimap->px_px = p->player_y * TILE;
-	minimap->py_px = p->player_x * TILE;
+	minimap->px_px = (p->player_x + 0.5) * TILE;
+	minimap->py_px = (p->player_y + 0.5) * TILE;
 	minimap->floor = FLOOR;
 	minimap->celing = CELING;
-	minimap->map_height = p->rows + 1;
+	minimap->map_height = p->rows;
 	minimap->map_width = 0;
 	minimap->screen = screen(minimap->mlx, HEIGHT, WIDTH);
 	minimap->pa = dtor(270);

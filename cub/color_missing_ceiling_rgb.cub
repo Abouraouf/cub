@@ -1,0 +1,12 @@
+NO ./textures/colorstone.xpm
+SO ./textures/greystone.xpm
+WE ./textures/mossy.xpm
+EA ./textures/wood.xpm
+
+C 200,200,255
+F 200,20,0
+
+1111
+110E1111
+1101
+11111
