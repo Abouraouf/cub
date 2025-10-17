@@ -6,96 +6,99 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:45:38 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/17 10:43:45 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/17 20:05:21 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	floorAndceling(int drawStart, int drawEnd, int x, t_info *i);
+void	floorandceling(int drawstart, int drawend, int x, t_info *i);
 double	calc_ray_angle(t_info *i, int x);
 t_ray	*cast_ray_dda(double ray_angle, t_info *m);
 
-void calc_text_coor(t_ray *ray, int drawStart, int lineHeight)
+void	calc_text_coor(t_ray *ray, int drawstart, int lineheight)
 {
-	double wallX;
-	int texX;
-	double step;
-	double texPos;
+	double	wallx;
+	int		texx;
+	double	step;
+	double	texpos;
 
 	if (ray->side == 0)
-		wallX = ray->hitY;
+		wallx = ray->hity;
 	else
-		wallX = ray->hitX;
-	wallX -= floor((wallX));
-	texX = (int)(wallX * (double)(texWidth));
-	if(ray->side == 0 && ray->rayDirX > 0)
-		texX = texWidth - texX - 1;
-	if(ray->side == 1 && ray->rayDirY < 0)
-		texX = texWidth - texX - 1;
-	step = 1.0 * texHeight / lineHeight;
-	texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
+		wallx = ray->hitx;
+	wallx -= floor((wallx));
+	texx = (int)(wallx * (double)(TEXWIDTH));
+	if (ray->side == 0 && ray->raydirx > 0)
+		texx = TEXWIDTH - texx - 1;
+	if (ray->side == 1 && ray->raydiry < 0)
+		texx = TEXWIDTH - texx - 1;
+	step = 1.0 * TEXHEIGHT / lineheight;
+	texpos = (drawstart - HEIGHT / 2 + lineheight / 2) * step;
 }
 
-int choose_text(t_ray *ray)
+int	choose_text(t_ray *ray)
 {
-	int currentTexture;
+	int	currenttexture;
 
 	if (ray->side == 0)
 	{
-		if (ray->rayDirX > 0)
-			currentTexture = 0;
+		if (ray->raydirx > 0)
+			currenttexture = 0;
 		else
-			currentTexture = 1;
+			currenttexture = 1;
 	}
 	else
 	{
-		if (ray->rayDirY > 0)
-			currentTexture = 2;
+		if (ray->raydiry > 0)
+			currenttexture = 2;
 		else
-		currentTexture = 3;
+			currenttexture = 3;
 	}
-	return (currentTexture);
+	return (currenttexture);
 }
 
-void start_end(t_ray *ray)
+void	start_end(t_ray *ray)
 {
-	ray->lineHeight = (int)(HEIGHT / ray->dist);
-	ray->drawStart = -ray->lineHeight / 2 + HEIGHT / 2;
-	if (ray->drawStart < 0)
-		ray->drawStart = 0;
-	ray->drawEnd = ray->lineHeight / 2 + HEIGHT / 2;
-	if (ray->drawEnd >= HEIGHT)
-		ray->drawEnd = HEIGHT - 1;
+	ray->lineheight = (int)(HEIGHT / ray->dist);
+	ray->drawstart = -ray->lineheight / 2 + HEIGHT / 2;
+	if (ray->drawstart < 0)
+		ray->drawstart = 0;
+	ray->drawend = ray->lineheight / 2 + HEIGHT / 2;
+	if (ray->drawend >= HEIGHT)
+		ray->drawend = HEIGHT - 1;
 	if (ray->side == 0)
-		ray->texX = ray->hitY;
+		ray->texx = ray->hity;
 	else
-		ray->texX = ray->hitX;
+		ray->texx = ray->hitx;
 }
 
-void textures(t_ray *ray, t_info *i, int x, int y)
+void	textures(t_ray *ray, t_info *i, int x, int y)
 {
-	double step;
-	double texPos;
-	int currentTexture;
-	int texY;
-	int color;
+	double	step;
+	double	texpos;
+	int		currenttexture;
+	int		texy;
+	int		color;
 
-	step = 1.0 * texHeight / ray->lineHeight;
-	texPos = (ray->drawStart - HEIGHT / 2 + ray->lineHeight / 2) * step;
-	currentTexture = choose_text(ray);
-	y = ray->drawStart;
-	while (y < ray->drawEnd)
+	step = 1.0 * TEXHEIGHT / ray->lineheight;
+	texpos = (ray->drawstart - HEIGHT / 2 + ray->lineheight / 2) * step;
+	currenttexture = choose_text(ray);
+	y = ray->drawstart;
+	while (y < ray->drawend)
 	{
-		texY = (int)texPos & (texHeight - 1);
-		texPos += step;
-		color = *(int *)(i->textures[currentTexture].addr + (texY * i->textures[currentTexture].line_length + (int)ray->texX * (i->textures[currentTexture].bits_per_pixel / 8)));
-        draw_pixel_on_screen(x, y, color, i);
+		texy = (int)texpos & (TEXHEIGHT - 1);
+		texpos += step;
+		color = *(int *)(i->textures[currenttexture].addr
+				+ (texy * i->textures[currenttexture].line_length
+					+ (int)ray->texx
+					* (i->textures[currenttexture].bits_per_pixel / 8)));
+		my_mlx_pixel_put(i->screen, x, y, color);
 		y++;
 	}
 }
 
-int draw_columns(t_info *i)
+int	draw_columns(t_info *i)
 {
 	t_ray	*ray;
 	int		x;
@@ -104,21 +107,21 @@ int draw_columns(t_info *i)
 	ray = NULL;
 	while (x < WIDTH)
 	{
-		if (ray)
-			free(ray);
-		ray = cast_ray_dda(calc_ray_angle(i, x), i);
+		(free(ray), ray = cast_ray_dda(calc_ray_angle(i, x), i));
 		if (!ray)
 		{
 			x++;
-			continue;
+			continue ;
 		}
 		start_end(ray);
-		ray->texX -= floor((ray->texX));
-		ray->texX = (int)(ray->texX * (double)(texWidth));
-		if(ray->side == 0 && ray->rayDirX > 0) ray->texX = texWidth - ray->texX - 1;
-		if(ray->side == 1 && ray->rayDirY < 0) ray->texX = texWidth - ray->texX - 1;
+		ray->texx -= floor((ray->texx));
+		ray->texx = (int)(ray->texx * (double)(TEXWIDTH));
+		if (ray->side == 0 && ray->raydirx > 0)
+			ray->texx = TEXWIDTH - ray->texx - 1;
+		if (ray->side == 1 && ray->raydiry < 0)
+			ray->texx = TEXWIDTH - ray->texx - 1;
 		textures(ray, i, x, 0);
-		(floorAndceling(ray->drawStart, ray->drawEnd, x, i), x++);
+		(floorandceling(ray->drawstart, ray->drawend, x, i), x++);
 	}
 	mlx_put_image_to_window(i->mlx, i->win, i->screen->img_ptr, 0, 0);
 	return (free(ray), 0);
