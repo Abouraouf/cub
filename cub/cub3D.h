@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:29:55 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/17 09:48:14 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/17 11:10:35 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_info
 	double	py_px;
 	double	px_px;
 	int		map_height;
-	int		map_width;
 	double	distToProjPlane;
 	int		floor;
 	int		celing;

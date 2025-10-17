@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 11:41:32 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/16 19:28:59 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/17 11:14:37 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ int key_press(int keycode, void *var)
 
 int mlx_close(t_info *minimap)
 {
+	int i;
 
+	i = 0;
 	mlx_clear_window(minimap->mlx, minimap->win);
 	mlx_destroy_window(minimap->mlx, minimap->win);
 	mlx_destroy_image(minimap->mlx, minimap->screen->img_ptr);
@@ -89,6 +91,9 @@ int mlx_close(t_info *minimap)
 	free(minimap->screen);
 	free(minimap->textures);
 	free(minimap->mlx);
+	while (minimap->map[i])
+		(free(minimap->map[i]), i++);
+	free(minimap->map);
 	free(minimap);
 	exit(0);
 	return (0);

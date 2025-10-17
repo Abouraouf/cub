@@ -6,7 +6,7 @@ SRC = cub3D.c get_next_line.c get_next_line_utils.c utils_1.c utils_2.c \
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 MLX_FLAGS = -lmlx -lXext -lX11 -lm
 
 %.o: %.c cub3D.h get_next_line.h

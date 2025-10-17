@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/16 17:23:49 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/17 11:29:05 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ void	 free_in_case(t_cub3d *info, int i) // if 0 free everything and close file 
 		if (info->fd >= 0)
 			close(info->fd);
 	}
-	if (i == 1)
+	if (i > 0)
 	{
 		free(info->xpm_inorder);
 		ft_free(info->first_lines);
 		info->first_lines= NULL;
-		ft_free(info->ones_zeros);
 		info->ones_zeros = NULL;
 		ft_free(info->xpm_files);
 		info->xpm_files = NULL;
@@ -78,10 +77,9 @@ void	 free_in_case(t_cub3d *info, int i) // if 0 free everything and close file 
 		info->coord = NULL;
 		free(info->map_coord);
 		info->map_coord = NULL;
-		if (info->fd >= 0)
-			close(info->fd);
 		free(info);
-		return (printf("Error\n"), exit(1));
+		if (i == 1)
+			return (printf("Error\n"), exit(1));
 	}
 }
 

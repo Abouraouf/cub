@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:30:47 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/17 10:42:16 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/17 11:34:32 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ void floorAndceling(int drawStart, int drawEnd, int x, t_info *i)
 	int ii;
 
 	ii = 0;
+	if (drawStart < 0)
+		drawStart = 0;
+	if (drawEnd < 0)
+		drawEnd = 0;
 	while (ii < drawStart - 1)
 	{
 		draw_pixel_on_screen(x, ii, i->celing, i);

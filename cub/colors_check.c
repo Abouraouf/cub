@@ -83,7 +83,6 @@ void	validate_color_values(char **split, t_cub3d *info, char f_or_c)
 	int	r;
 	int	g;
 	int	b;
-
 	if (!ft_is_all_digits(split[0])
 		|| !ft_is_all_digits(split[1])
 		|| !ft_is_all_digits(split[2]))
@@ -93,10 +92,12 @@ void	validate_color_values(char **split, t_cub3d *info, char f_or_c)
 	b = ft_atoi_color(split[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (info->error = 1, (void)0);
-	if (f_or_c == 'F')
-		info->floor = (r << 16) | (g << 8) | b;
-	else if (f_or_c == 'C')
-		info->ceiling = (r << 16) | (g << 8) | b;
+	if (f_or_c == 'f')
+	{
+		info->floor_for_mlx = (r << 16) | (g << 8) | b;
+	}
+	else if (f_or_c == 'c')
+		info->ceiling_for_mlx = (r << 16) | (g << 8) | b;
 }
 
 
@@ -143,7 +144,9 @@ void	check_color_line(t_cub3d *info,	 char type)
 		return ;
 	}
 	if (!info->error)
+	{
 		process_and_validate_split(line_start, info, type);
+	}
 }
 
 void	ft_check_limits_floor(t_cub3d	*info)
