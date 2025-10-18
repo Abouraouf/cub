@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/17 11:29:05 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/18 15:35:08 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void ft_init(t_cub3d *info)
+void	ft_init(t_cub3d *info)
 {
 	info->coord = NULL;
 	info->xpm_files = NULL;
@@ -29,23 +29,23 @@ int	check_end_xpm(char *str)
 	return (0);
 }
 
-void		check_xpm(t_cub3d *info)
+void	check_xpm(t_cub3d *info)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (info->first_lines[i] && i < 4)
 	{
 		j = 0;
-				
 		if ((int)ft_strlen(info->first_lines[i]) > 4)
 		{
 			while (info->first_lines[i][j])
 				j++;
 			while (info->first_lines[i][--j] == ' ')
-			{}
-			if (!check_end_xpm(info->first_lines[i] + j - 3)) //test later
+			{
+			}
+			if (!check_end_xpm(info->first_lines[i] + j - 3))
 				return ((void)(info->error = 1));
 		}
 		else
@@ -54,7 +54,7 @@ void		check_xpm(t_cub3d *info)
 	}
 }
 
-void	 free_in_case(t_cub3d *info, int i) // if 0 free everything and close file descriptors if 1 free useless
+void	free_in_case(t_cub3d *info, int i)
 {
 	if (i == 0)
 	{
@@ -69,7 +69,7 @@ void	 free_in_case(t_cub3d *info, int i) // if 0 free everything and close file 
 	{
 		free(info->xpm_inorder);
 		ft_free(info->first_lines);
-		info->first_lines= NULL;
+		info->first_lines = NULL;
 		info->ones_zeros = NULL;
 		ft_free(info->xpm_files);
 		info->xpm_files = NULL;
@@ -97,102 +97,4 @@ void	ft_copy_the_first_lines(t_cub3d *info, int i)
 	info->first_lines = ft_split(info->coord, '\n');
 	if (!info->first_lines)
 		free_in_case(info, 1);
-}
-
-
-void	ft_check_first_lines(t_cub3d *info)
-{
-	int	i;
-	int	flag[6];
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (j < 6)
-	{
-		skip_spaces(info->map_coord, &i);
-		flag[j] = find_nswe(info->map_coord + i, info, i);
-		if (!flag[j++])
-			return ((void)(info->error = 1));
-		while (info->map_coord[i] && info->map_coord[i] != '\n')
-			i++;
-		while (info->map_coord[i] && info->map_coord[i] == '\n')
-			i++;
-	}
-	info->place_map = i;
-	ft_copy_the_first_lines(info, i);
-	if (ft_check_duplicates(flag))
-		info->error = 0;
-	else
-		info->error = 1;
-}
-
-void	ft_check_all_above(t_cub3d *info)
-{
-	ft_check_first_lines(info);
-	if (info->error == 1)
-		return ;
-	possible_character(info);
-	if (info->error == 1)
-		return ;
-	ft_check_limits_floor(info);
-	if (info->error == 1)
-		return ;
-	ft_check_limits_ceiling(info); //handle the exit if anything happens
-	if (info->error == 1)
-		return ;
-	ft_check_if_empty(info);
-	if (info->error == 1)
-		return ;
-	ft_check_map_borders(info);
-	if (info->error == 1)
-		return ;
-	check_xpm(info);
-}
-
-void	ft_check_argv_1(t_cub3d *info, char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	while (str[--i] == ' ' && i > 0)
-	{}
-	if (ft_strncmp(str + i - 3, ".cub", 4))
-		return ((void)(info->error = 1));
-	info->error = 0;
-}
-
-t_cub3d	*parsing(int ac, char **argv)
-{
-	t_cub3d	*info;
-	int		fd;
-
-	if (ac != 2)
-		return (printf("Error\n, wrong argument count\n"), exit(1), NULL);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (printf("Error\n"), exit(1), NULL);
-	info = malloc(sizeof(t_cub3d));
-	if (!info)
-		free_in_case(info, 1);
-	ft_check_argv_1(info, argv[1]);
-	ft_init(info);
-	if (info->error == 0)
-	{
-		ft_read_all(fd, info);
-		if (!info->map_coord)
-			free_in_case(info, 1);
-		ft_check_all_above(info);
-		if(info->error == 1)
-			free_in_case(info, 1);
-		trim_xpm(info);
-		order_xpm(info);
-		find_player_l(info);
-	}
-	if (info->error == 1)
-		free_in_case(info, 1);
-	free_in_case(info, 0);
-	return (info);
 }

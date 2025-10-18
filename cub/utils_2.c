@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:02:28 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/17 09:31:43 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/18 15:39:22 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -78,7 +77,7 @@ void	order_xpm(t_cub3d *info)
 {
 	int	i;
 	int	j;
-	int placement;
+	int	placement;
 
 	i = 0;
 	info->xpm_inorder = malloc(sizeof(char *) * 5);
@@ -86,7 +85,7 @@ void	order_xpm(t_cub3d *info)
 		return (free_in_case(info, 1));
 	while (info->first_lines[i])
 	{
-		placement = find_nswe(info->first_lines[i], NULL,j);
+		placement = find_nswe(info->first_lines[i], NULL, j);
 		j = 0;
 		skip_spaces(info->first_lines[i], &j);
 		if (placement > 0 && placement < 5)
@@ -96,27 +95,4 @@ void	order_xpm(t_cub3d *info)
 		i++;
 	}
 	info->xpm_inorder[4] = NULL;
-}
-
-void	find_player_l(t_cub3d	*info)
-{
-	int	i;
-	int	l;
-
-	i = 0;
-	while (info->ones_zeros[i])
-	{
-		l = 0;
-		while (info->ones_zeros[i][l])
-		{
-			if (check_if_player(info->ones_zeros[i] + l))
-			{
-				info->player_x = l;
-				info->player_y = i;
-			}
-			l++;
-		}
-		i++;
-	}
-	info->rows = i;
 }

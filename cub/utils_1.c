@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:40:08 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/16 13:19:32 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/18 15:39:41 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_open_xpm(t_cub3d *info)
 {
 	int		fd[4];
-	int 	i;
+	int		i;
 
 	i = 0;
 	while (info->xpm_files[i])
@@ -39,9 +39,13 @@ void	ft_open_xpm(t_cub3d *info)
 
 int	skip_from_end(char *str, int *i)
 {
-	while (str[(*i)++]){}
+	while (str[(*i)++])
+	{
+	}
 	(*i)--;
-	while (*i > 0 && str[(*i)--] == ' '){}
+	while (*i > 0 && str[(*i)--] == ' ')
+	{
+	}
 	return (*i);
 }
 
@@ -69,8 +73,8 @@ void	trim_xpm(t_cub3d *info)
 		info->xpm_files[i] = ft_substr(info->first_lines[i], start, finish);
 		i++;
 	}
-	info->xpm_files[i] = NULL;
-	ft_open_xpm(info);
+	return (info->xpm_files[i] = NULL, ft_open_xpm(info), order_xpm(info),
+		find_player_l(info));
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -98,8 +102,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 void	ft_read_all(int fd, t_cub3d *info)
 {
 	char	*tmp;
-	char	*tmp_join = NULL;
+	char	*tmp_join;
 
+	tmp_join = NULL;
 	info->map_coord = NULL;
 	info->fd = fd;
 	while (1)
@@ -114,22 +119,3 @@ void	ft_read_all(int fd, t_cub3d *info)
 		tmp = NULL;
 	}
 }
-
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
-{
-	size_t	size_src;
-	size_t	i;
-
-	size_src = ft_strlen(src);
-	if (size == 0)
-		return (size_src);
-	i = 0;
-	while (i < size - 1 && src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (size_src);
-}
-
