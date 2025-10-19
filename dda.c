@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:30:47 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/19 11:18:42 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 13:57:03 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_ray	*ray_init(t_info *m, double ray_angle)
 	t_ray	*result;
 
 	result = malloc(sizeof(t_ray));
+	if (!result)
+		mlx_close(m);
 	result->side = 0;
 	result->posx = m->px_px / TILE;
 	result->posy = m->py_px / TILE;

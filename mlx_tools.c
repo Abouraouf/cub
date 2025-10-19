@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 11:41:32 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/17 19:54:57 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 13:45:16 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ void	draw_column_on_screen(int coor[2], int x, int color, t_info *i)
 	}
 }
 
-t_img	*screen(void *mlx, int height, int width)
+t_img	*screen(int height, int width, t_info *m, t_cub3d *p)
 {
 	t_img	*new;
 
 	new = malloc(sizeof(t_img));
+	if (!new)
+		(free_in_case(p, 2), mlx_close(m));
 	new->height = height;
 	new->width = width;
-	new->img_ptr = mlx_new_image(mlx, width, height);
+	new->img_ptr = mlx_new_image(m->mlx, width, height);
 	new->addr = mlx_get_data_addr(new->img_ptr, &new->bits_per_pixel,
 			&new->line_length, &new->endian);
 	return (new);

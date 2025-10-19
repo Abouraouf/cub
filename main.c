@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 09:56:29 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/19 13:02:26 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 13:55:26 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	direction(t_info *m, t_cub3d *p)
 
 void	setup_textures(t_info *minimap, t_cub3d *p)
 {
-	minimap->textures = malloc(sizeof(t_img) * 4);
 	minimap->textures[0].img_ptr = mlx_xpm_file_to_image(minimap->mlx,
 			p->xpm_inorder[0], &minimap->textures[0].width,
 			&minimap->textures[0].height);
@@ -74,6 +73,8 @@ int	main(int ac, char **argv)
 
 	p = parsing(ac, argv);
 	minimap = malloc(sizeof(t_info));
+	if (!minimap)
+		(ft_free(p->ones_zeros), free_in_case(p, 1));
 	minimap->disttoprojplane = (WIDTH / 2) / tan(dtor(60) / 2);
 	minimap->map = p->ones_zeros;
 	minimap->mlx = mlx_init();
@@ -82,14 +83,14 @@ int	main(int ac, char **argv)
 	minimap->py_px = (p->player_y + 0.5) * TILE;
 	minimap->floor = p->floor_for_mlx;
 	minimap->celing = p->ceiling_for_mlx;
-	minimap->map_height = p->rows;
-	direction(minimap, p);
-	minimap->screen = screen(minimap->mlx, HEIGHT, WIDTH);
-	setup_textures(minimap, p);
-	free_in_case(p, 2);
+	(direction(minimap, p), minimap->map_height = p->rows);
+	minimap->screen = screen(HEIGHT, WIDTH, minimap, p);
+	minimap->textures = malloc(sizeof(t_img) * 4);
+	if (!minimap->textures)
+		(free_in_case(p, 2), mlx_close(minimap));
+	(setup_textures(minimap, p), free_in_case(p, 2));
 	mlx_loop_hook(minimap->mlx, frame, minimap);
 	mlx_key_hook(minimap->win, key_press, minimap);
 	mlx_hook(minimap->win, 17, 1L << 0, mlx_close, minimap);
-	mlx_loop(minimap->mlx);
-	return (0);
+	return (mlx_loop(minimap->mlx), 0);
 }

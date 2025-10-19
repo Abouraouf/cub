@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:29:55 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/17 20:03:35 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 13:44:38 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ typedef struct s_cub3d
 }	t_cub3d;
 
 void	draw_column_on_screen(int coor[2], int x, int color, t_info *i);
-t_img	*screen(void *mlx, int height, int width);
+t_img	*screen(int height, int width, t_info *m, t_cub3d *p);
 int		draw_columns(t_info *i);
 double	dtor(double degree);
 int		mlx_close(t_info *minimap);
