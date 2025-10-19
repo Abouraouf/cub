@@ -10,7 +10,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -lmlx -lXext -lX11 -lm
 
-%.o: %.c cub3D.h get_next_line.h
+%.o: %.c cub3D.h get_next_line.h 
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 all: $(NAME)
