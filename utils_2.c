@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:02:28 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/18 15:39:22 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/19 15:52:48 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ void	order_xpm(t_cub3d *info)
 	int	i;
 	int	j;
 	int	placement;
+	int	counter;
 
+	counter = 0;
 	i = 0;
 	info->xpm_inorder = malloc(sizeof(char *) * 5);
 	if (!info->xpm_inorder)
@@ -90,7 +92,8 @@ void	order_xpm(t_cub3d *info)
 		skip_spaces(info->first_lines[i], &j);
 		if (placement > 0 && placement < 5)
 		{
-			info->xpm_inorder[placement - 1] = info->xpm_files[i];
+			info->xpm_inorder[placement - 1] = info->xpm_files[counter];
+			counter++;
 		}
 		i++;
 	}

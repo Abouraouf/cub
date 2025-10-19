@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/18 15:35:08 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/19 15:01:21 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,18 @@ void	check_xpm(t_cub3d *info)
 	int	j;
 
 	i = 0;
-	while (info->first_lines[i] && i < 4)
+	while (info->first_lines[i])
 	{
 		j = 0;
 		if ((int)ft_strlen(info->first_lines[i]) > 4)
 		{
+			skip_spaces(info->first_lines[i], &j);
+			if (find_nswe(info->first_lines[i] + j, info, j) == 5
+				|| find_nswe(info->first_lines[i] + j, info, j) == 6)
+			{
+				i++;
+				continue ;
+			}
 			while (info->first_lines[i][j])
 				j++;
 			while (info->first_lines[i][--j] == ' ')

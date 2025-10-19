@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:40:08 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/18 15:39:41 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/19 15:34:32 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,43 @@ void	trim_xpm(t_cub3d *info)
 	int	j;
 	int	start;
 	int	finish;
+	int	counter;
 
 	if (!info->first_lines)
 		return ;
 	finish = 0;
+	counter = 0;
 	i = 0;
 	info->xpm_files = malloc(sizeof(char *) * 5);
-	while (i < 4)
+	while (counter < 4)
 	{
 		j = 0;
 		skip_spaces(info->first_lines[i], &j);
+		if (find_nswe(info->first_lines[i] + j, info, j) == 5
+			|| find_nswe(info->first_lines[i] + j, info, j) == 6)
+		{
+			i++ ;
+			continue ;
+		}
 		while (info->first_lines[i][j] && info->first_lines[i][j] != ' ')
 			j++;
 		skip_spaces(info->first_lines[i], &j);
 		start = j;
 		finish = skip_from_end(info->first_lines[i], &j);
-		info->xpm_files[i] = ft_substr(info->first_lines[i], start, finish);
+		info->xpm_files[counter] = ft_substr(info->first_lines[i], start, finish);
+		counter++;
 		i++;
 	}
-	return (info->xpm_files[i] = NULL, ft_open_xpm(info), order_xpm(info),
+	info->xpm_files[counter] = NULL;
+	// for (int i = 0; i < 4; i++)
+	// {
+	// 	printf("%s\n", info->xpm_files[i]);
+	// }
+	// if (info->xpm_files[4] == NULL)
+	// 	printf("done\n");
+	// printf("%d", counter);
+	// exit(0);
+	return (info->xpm_files[counter] = NULL, ft_open_xpm(info), order_xpm(info),
 		find_player_l(info));
 }
 

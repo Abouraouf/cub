@@ -11,7 +11,7 @@ CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -lmlx -lXext -lX11 -lm
 
 %.o: %.c cub3D.h get_next_line.h
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
 all: $(NAME)
 
@@ -25,3 +25,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+# -fsanitize=address
