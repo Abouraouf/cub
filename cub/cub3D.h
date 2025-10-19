@@ -6,32 +6,30 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:29:55 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/18 15:38:25 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/17 20:03:35 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <mlx.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <math.h>
-#include <stdbool.h>
-#include <fcntl.h>
-#include "get_next_line.h"
+# include <mlx.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <math.h>
+# include <stdbool.h>
+# include <fcntl.h>
+# include "get_next_line.h"
 
-#define M_PI 3.14159265358979323846
-#define M_PI_2 1.57079632679489661923
-#define WIDTH 2000
-#define HEIGHT 1500
-#define FOV (M_PI / 3.0)
-#define TILE 64
-#define texWidth 64
-#define texHeight 64
-#define	CELING 0x0086C1B9
-#define	FLOOR 0x00555555
+# define M_PI 3.14159265358979323846
+# define M_PI_2 1.57079632679489661923
+# define WIDTH 2000
+# define HEIGHT 1500
+# define FOV 1.0471975512
+# define TILE 64
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
 
 typedef struct s_img
 {
@@ -42,7 +40,7 @@ typedef struct s_img
 	int		endian;
 	int		width;
 	int		height;
-} t_img;
+}	t_img;
 
 typedef struct s_info
 {
@@ -55,27 +53,33 @@ typedef struct s_info
 	double	py_px;
 	double	px_px;
 	int		map_height;
-	double	distToProjPlane;
+	double	disttoprojplane;
 	int		floor;
 	int		celing;
-} t_info;
+}	t_info;
 
 typedef struct s_ray{
-	int		mapX, mapY;
-    int		side;
-	int		stepX, stepY;
-	int		lineHeight;
-	int		drawEnd;
-	int		drawStart;
-    double	dist;
-    double	hitX, hitY;
-	double	rayDirX;
-	double	rayDirY;
-	double	posX, posY;
-	double	deltaDistX, deltaDistY;
-	double	sideDistX, sideDistY;
-	double	texX;
-} t_ray;
+	int		mapx;
+	int		mapy;
+	int		side;
+	int		stepx;
+	int		stepy;
+	int		lineheight;
+	int		drawend;
+	int		drawstart;
+	double	dist;
+	double	hitx;
+	double	hity;
+	double	raydirx;
+	double	raydiry;
+	double	posx;
+	double	posy;
+	double	deltadistx;
+	double	deltadisty;
+	double	sidedistx;
+	double	sidedisty;
+	double	texx;
+}	t_ray;
 
 typedef struct s_cub3d
 {
@@ -97,7 +101,6 @@ typedef struct s_cub3d
 	int		floor;
 }	t_cub3d;
 
-void	draw_pixel_on_screen(int x, int y, int color, t_info *i);
 void	draw_column_on_screen(int coor[2], int x, int color, t_info *i);
 t_img	*screen(void *mlx, int height, int width);
 int		draw_columns(t_info *i);

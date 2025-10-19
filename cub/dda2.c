@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:59:10 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/17 10:24:19 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/17 20:00:33 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,36 @@
 
 void	ray_init2(t_ray *result)
 {
-	if (result->rayDirX < 0)
+	if (result->raydirx < 0)
 	{
-		result->stepX = -1;
-		result->sideDistX = (result->posX - result->mapX) * result->deltaDistX;
+		result->stepx = -1;
+		result->sidedistx = (result->posx - result->mapx) * result->deltadistx;
 	}
 	else
 	{
-		result->stepX = 1;
-		result->sideDistX = (result->mapX + 1.0 - result->posX) * result->deltaDistX;
+		result->stepx = 1;
+		result->sidedistx = (result->mapx + 1.0 - result->posx)
+			* result->deltadistx;
 	}
-	if (result->rayDirY < 0)
+	if (result->raydiry < 0)
 	{
-		result->stepY = -1;
-		result->sideDistY = (result->posY - result->mapY) * result->deltaDistY;
+		result->stepy = -1;
+		result->sidedisty = (result->posy - result->mapy) * result->deltadisty;
 	}
 	else
 	{
-		result->stepY = 1;
-		result->sideDistY = (result->mapY + 1.0 - result->posY) * result->deltaDistY;
+		result->stepy = 1;
+		result->sidedisty = (result->mapy + 1.0 - result->posy)
+			* result->deltadisty;
 	}
+}
+
+void	key_press2(int keycode, t_info *m)
+{
+	if (keycode == 65363)
+		m->pa += 0.04;
+	else if (keycode == 65361)
+		m->pa += -0.04;
+	else if (keycode == 65307)
+		mlx_close(m);
 }
