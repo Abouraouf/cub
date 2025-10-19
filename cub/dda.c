@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:30:47 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/17 20:00:33 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 11:18:42 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	floorandceling(int drawstart, int drawend, int x, t_info *i)
 		ii++;
 	}
 	ii = drawend;
-	while (ii < HEIGHT)
+	while (ii < HEIGHT - 1)
 	{
 		my_mlx_pixel_put(i->screen, x, ii, i->floor);
 		ii++;

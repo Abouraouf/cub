@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:45:38 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/18 11:05:35 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 11:26:25 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ int	choose_text(t_ray *ray)
 	if (ray->side == 0)
 	{
 		if (ray->raydirx > 0)
-			currenttexture = 0;
+			currenttexture = 3;
 		else
-			currenttexture = 1;
+			currenttexture = 2;
 	}
 	else
 	{
 		if (ray->raydiry > 0)
-			currenttexture = 2;
+			currenttexture = 1;
 		else
-			currenttexture = 3;
+			currenttexture = 0;
 	}
 	return (currenttexture);
 }
