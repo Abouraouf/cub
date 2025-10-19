@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 09:56:29 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/17 19:56:41 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 09:52:14 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,8 @@
 int	frame(void *minimap)
 {
 	t_info	*m;
-	int		i;
 
-	i = 0;
 	m = minimap;
-	while (i < WIDTH * HEIGHT * (m->screen->bits_per_pixel / 8))
-	{
-		m->screen->addr[i] = 0;
-		i++;
-	}
 	draw_columns(m);
 	return (0);
 }
