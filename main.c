@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 09:56:29 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/19 09:52:14 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 13:02:26 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	direction(t_info *m, t_cub3d *p)
 	else if (p->ones_zeros[p->player_y][p->player_x] == 'S')
 		m->pa = dtor(90);
 	else if (p->ones_zeros[p->player_y][p->player_x] == 'W')
-		m->pa = dtor(0);
-	else
 		m->pa = dtor(180);
+	else
+		m->pa = dtor(0);
 }
 
 void	setup_textures(t_info *minimap, t_cub3d *p)
