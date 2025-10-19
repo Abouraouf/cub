@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:29:55 by eabourao          #+#    #+#             */
 /*   Updated: 2025/10/17 20:03:35 by ayel-arr         ###   ########.fr       */
@@ -129,5 +129,12 @@ void	order_xpm(t_cub3d *info);
 t_cub3d	*parsing(int ac, char **argv);
 int		check_if_player(char *str);
 void	find_player_l(t_cub3d	*info);
-
+int		ft_calc_size(t_cub3d *info, char p);
+int		count_strings(char **array);
+void	validate_color_values(char **split, t_cub3d *info, char f_or_c);
+void	check_xpm(t_cub3d *info);
+void	ft_init(t_cub3d *info);
+void	check_after_finish(t_cub3d *info, int i);
+int		calculate_lines(char **str);
+int		ft_check_surr(char **str, int j, int i);
 #endif
