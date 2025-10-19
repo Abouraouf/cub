@@ -6,7 +6,7 @@
 /*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:45:38 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/17 20:05:21 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/18 11:05:35 by ayel-arr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,6 @@
 void	floorandceling(int drawstart, int drawend, int x, t_info *i);
 double	calc_ray_angle(t_info *i, int x);
 t_ray	*cast_ray_dda(double ray_angle, t_info *m);
-
-void	calc_text_coor(t_ray *ray, int drawstart, int lineheight)
-{
-	double	wallx;
-	int		texx;
-	double	step;
-	double	texpos;
-
-	if (ray->side == 0)
-		wallx = ray->hity;
-	else
-		wallx = ray->hitx;
-	wallx -= floor((wallx));
-	texx = (int)(wallx * (double)(TEXWIDTH));
-	if (ray->side == 0 && ray->raydirx > 0)
-		texx = TEXWIDTH - texx - 1;
-	if (ray->side == 1 && ray->raydiry < 0)
-		texx = TEXWIDTH - texx - 1;
-	step = 1.0 * TEXHEIGHT / lineheight;
-	texpos = (drawstart - HEIGHT / 2 + lineheight / 2) * step;
-}
 
 int	choose_text(t_ray *ray)
 {
@@ -87,7 +66,7 @@ void	textures(t_ray *ray, t_info *i, int x, int y)
 	y = ray->drawstart;
 	while (y < ray->drawend)
 	{
-		texy = (int)texpos & (TEXHEIGHT - 1);
+		texy = (int)texpos % TEXHEIGHT;
 		texpos += step;
 		color = *(int *)(i->textures[currenttexture].addr
 				+ (texy * i->textures[currenttexture].line_length
