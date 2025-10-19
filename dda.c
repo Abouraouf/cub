@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:30:47 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/19 13:57:03 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:20:47 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_ray	*cast_ray_dda(double ray_angle, t_info *m)
 		if (result->mapy >= m->map_height || result->mapy < 0
 			|| result->mapx >= (int)ft_strlen(m->map[result->mapy])
 			|| result->mapx < 0)
-			return (free(result), NULL);
+			return (m->out = 1, free(result), NULL);
 		if (m->map[result->mapy][result->mapx] == '1')
 			break ;
 	}

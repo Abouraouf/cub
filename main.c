@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 09:56:29 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/19 13:55:26 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:23:35 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,18 @@
 int	frame(void *minimap)
 {
 	t_info	*m;
+	int		i;
 
 	m = minimap;
+	if (m->out)
+	{
+		i = 0;
+		while (i < HEIGHT * WIDTH * (m->screen->bits_per_pixel / 8))
+		{
+			m->screen->addr[i] = 0;
+			i++;
+		}
+	}
 	draw_columns(m);
 	return (0);
 }

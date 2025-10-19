@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 18:02:28 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/19 17:08:56 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:25:58 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_check_all_above(t_cub3d *info)
 	ft_check_map_borders(info);
 	if (info->error == 1)
 		return ;
-	check_xpm(info);
+	check_xpm(info, 0);
 }
 
 void	ft_check_argv_1(t_cub3d *info, char *str)

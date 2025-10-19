@@ -2,7 +2,7 @@ NAME = cub3D
 
 SRC = cub3D.c get_next_line.c get_next_line_utils.c utils_1.c utils_2.c \
 	map_parse_1.c colors_check.c utils_split.c main.c mlx_tools.c texturing.c dda.c dda2.c \
-	utils_3.c utils_4.c utils_5.c
+	utils_3.c utils_4.c utils_5.c utils_6.c
 
 OBJ = $(SRC:.c=.o)
 

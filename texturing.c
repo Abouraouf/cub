@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texturing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:45:38 by ayel-arr          #+#    #+#             */
-/*   Updated: 2025/10/19 11:26:25 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:21:36 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	draw_columns(t_info *i)
 
 	x = 0;
 	ray = NULL;
+	i->out = 0;
 	while (x < WIDTH)
 	{
 		(free(ray), ray = cast_ray_dda(calc_ray_angle(i, x), i));
@@ -92,8 +93,7 @@ int	draw_columns(t_info *i)
 			x++;
 			continue ;
 		}
-		start_end(ray);
-		ray->texx -= floor((ray->texx));
+		(start_end(ray), ray->texx -= floor((ray->texx)));
 		ray->texx = (int)(ray->texx * (double)(TEXWIDTH));
 		if (ray->side == 0 && ray->raydirx > 0)
 			ray->texx = TEXWIDTH - ray->texx - 1;

@@ -6,7 +6,7 @@
 /*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:31:09 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/19 17:14:48 by eabourao         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:26:15 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ int	check_end_xpm(char *str)
 	return (0);
 }
 
-void	check_xpm(t_cub3d *info)
+void	check_xpm(t_cub3d *info, int i)
 {
-	int	i;
 	int	j;
 
-	i = 0;
 	while (info->first_lines[i])
 	{
 		j = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayel-arr <ayel-arr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eabourao <eabourao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:29:55 by eabourao          #+#    #+#             */
-/*   Updated: 2025/10/19 13:44:38 by ayel-arr         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:25:54 by eabourao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_info
 	double	disttoprojplane;
 	int		floor;
 	int		celing;
+	int		out;
 }	t_info;
 
 typedef struct s_ray{
@@ -132,7 +133,7 @@ void	find_player_l(t_cub3d	*info);
 int		ft_calc_size(t_cub3d *info, char p);
 int		count_strings(char **array);
 void	validate_color_values(char **split, t_cub3d *info, char f_or_c);
-void	check_xpm(t_cub3d *info);
+void	check_xpm(t_cub3d *info, int i);
 void	ft_init(t_cub3d *info);
 void	check_after_finish(t_cub3d *info, int i);
 int		calculate_lines(char **str);
